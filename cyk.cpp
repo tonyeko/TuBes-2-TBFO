@@ -22,6 +22,8 @@ int main()
         for (int i = 0; i < bacafile.length(); i++) {
             if (bacafile[i] == ' ') {
                 sentence[j] = '~'; 
+            } else if (bacafile[i] == '\t'){
+                sentence[j] = '$';
             } else if (bacafile[i] == '\r'){
                 sentence[j] = ';';
             } else if (bacafile[i] == '\n'){

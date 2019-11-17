@@ -1,16 +1,32 @@
-S -> Chr# StrAll | InitVar Var2 | A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z | a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z | _ | Var EndLine | Object1 Object2 | Angka Digit | Digit Digit | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | Assign EndLine | Assign S | Fungsi S | Comment S | Assign Assign | Assign Fungsi | Assign Comment | Fungsi Fungsi | Fungsi Assign | Fungsi Comment| Comment Comment | Comment Assign | Comment Fungsi 
-
-Space -> ~
+S -> HashTag StrAll | Comment Endline | Comment NS | Comment Comment | Comment Assign | Comment Assign | Comment Fungsi | InitVar Var2 | A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z | a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z | _ | Object1 Object2 | Var EndLine | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | Angka Digit | Angka EndLine | Angka NS | Angka Comment | Angka Assign | Angka Fungsi | Assign EndLine | Assign NS | Assign Assign | Assign Var | Assign Angka | Assign Comment | Assign Fungsi | Fungsi NS | Fungsi Fungsi | Fungsi Assign | Fungsi Comment | Def Fungsi2
+NS -> EndLine S
+Space -> Space Space | ~ 
 EndLine -> ;
+Tab -> $
 
-Comment -> Chr# StrAll
+Fungsi -> Def Fungsi2
+Def -> BB Space
+BB -> ChrD BB2
+BB2 -> ChrE ChrF
+Fungsi2 -> Var Fungsi3
+Fungsi3 -> ParamFungsi Fungsi4
+Fungsi4 -> TD Fungsi5
+Fungsi5 -> EndLine Inside
+Inside -> Tab Inside2
+Inside2 -> HashTag StrAll | Comment Endline | Comment NInside | Comment Comment | Comment Assign | Comment Assign | InitVar Var2 | A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z | a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z | _ | Object1 Object2 | Var EndLine | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | Angka Digit | Angka EndLine | Angka NS | Angka Comment | Angka Assign | Assign EndLine | Assign NInside | Assign Assign | Assign Var | Assign Angka | Assign Comment
+NInside -> Endline Inside
+ParamFungsi -> BKurung ParamFungsi2
+ParamFungsi2 -> Vars TKurung | )
+Vars -> Var Vars2 | Space Vars | Vars Space | InitVar Var2 | A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z | a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z | _
+Vars2 -> Koma Vars
+Comment -> HashTag StrAll
 
 Assign -> Object1 Object2 | Var EndLine
 Object1 -> Var Eq
-Object2 -> Digit EndLine | Var EndLine | Str EndLine
+Object2 -> Digit EndLine | Var EndLine | Str EndLine | Angka Digit | Digit Digit | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 Eq -> Eq Space | Space Eq | =
 
-Angka -> Angka Digit | Digit Digit | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+Angka -> Angka Digit | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 Digit -> 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 
 Var -> InitVar Var2 | A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z | a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z | _
@@ -19,75 +35,19 @@ InitVar -> A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R
 ChrVar -> A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z | a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | _
 
 Str -> KutipSatu Str1
-Str1 -> Str0 Chr'
+Str1 -> Str0 KutipSatu
 Str0 -> Str0 Chr | Chr Chr
 Chr -> 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z | A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z | ! | # | $ | % | & | ( | ) | * | + | , | - | . | / | : | ; | < | = | > | ? | @ | [ | \ | ] | ^ | _ | ` | { | | | } | ~ | "
 
 StrAll -> StrAll ChrAll | ChrAll ChrAll
 ChrAll -> 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z | A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z | ! | " | # | $ | % | & | ' | ( | ) | * | + | , | - | . | / | : | ; | < | = | > | ? | @ | [ | \ | ] | ^ | _ | ` | { | | | } | ~
 
-Chr' -> '
-Chr# -> #
-ChrA -> A
-ChrB -> B
-ChrC -> C
-ChrD -> D
-ChrE -> E
-ChrF -> F
-ChrG -> G
-ChrH -> H
-ChrI -> I
-ChrJ -> J
-ChrK -> K
-ChrL -> L
-ChrM -> M
-ChrN -> N
-ChrO -> O
-ChrP -> P
-ChrQ -> Q
-ChrR -> R
-ChrS -> S
-ChrT -> T
-ChrU -> U
-ChrV -> V
-ChrW -> W
-ChrX -> X
-ChrY -> Y
-ChrZ -> Z
-Chra -> a
-Chrb -> b
-Chrc -> c
-Chrd -> d
-Chre -> e
-Chrf -> f
-Chrg -> g
-Chrh -> h
-Chri -> i
-Chrj -> j
-Chrk -> k
-Chrl -> l
-Chrm -> m
-Chrn -> n
-Chro -> o
-Chrp -> p
-Chrq -> q
-Chrr -> r
-Chrs -> s
-Chrt -> t
-Chru -> u
-Chrv -> v
-Chrw -> w
-Chrx -> x
-Chry -> y
-Chrz -> z
-Chr0 -> 0
-Chr1 -> 1
-Chr2 -> 2
-Chr3 -> 3
-Chr4 -> 4
-Chr5 -> 5
-Chr6 -> 6
-Chr7 -> 7
-Chr8 -> 8
-Chr9 -> 9
+KutipSatu -> '
+ChrD -> d
+ChrE -> e
+HashTag -> #
 Chr_ -> _
+TD -> :
+BKurung -> (
+TKurung -> )
+Koma -> ,
