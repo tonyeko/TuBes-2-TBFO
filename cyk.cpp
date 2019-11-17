@@ -17,11 +17,21 @@ int main()
         MB::grammar grammar(ifs);
         string bacafile;
         getline(ifs2, bacafile, '\0');
-        string sentence[bacafile.length()];
+        string sentence[bacafile.length()-count(bacafile.begin(), bacafile.end(), '\n')];
+        int j = 0;
         for (int i = 0; i < bacafile.length(); i++) {
-            sentence[i] = bacafile[i];
+            if (bacafile[i] == ' ') {
+                sentence[j] = '~'; 
+            } else if (bacafile[i] == '\r'){
+                sentence[j] = ';';
+            } else if (bacafile[i] == '\n'){
+                j--;
+            } else {
+                sentence[j] = bacafile[i];
+            }
+            j++;
         }
-        //cout << bacafile << endl;
+        //cout << j << bacafile.length()-count(bacafile.begin(), bacafile.end(), '\n') << endl;
         const size_t len = sizeof(sentence) / sizeof(sentence[0]);
         bool success = MB::cyk_parser(grammar).parse(sentence, sentence + len, cout);
         cout << "Success: " << boolalpha << success << '\n';

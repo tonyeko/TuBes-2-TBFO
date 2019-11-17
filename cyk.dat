@@ -1,4 +1,4 @@
-S -> Assign S | Fungsi S | Comment S | Assign Assign | Assign Fungsi | Assign Comment | Fungsi Fungsi | Fungsi Assign | Fungsi Comment| Comment Comment | Comment Assign | Comment Fungsi | Object1 Object2 | Var EndLine | Angka Digit | Digit Digit | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | Chr# StrAll
+S -> Chr# StrAll | InitVar Var2 | A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z | a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z | _ | Var EndLine | Object1 Object2 | Angka Digit | Digit Digit | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | Assign EndLine | Assign S | Fungsi S | Comment S | Assign Assign | Assign Fungsi | Assign Comment | Fungsi Fungsi | Fungsi Assign | Fungsi Comment| Comment Comment | Comment Assign | Comment Fungsi 
 
 Space -> ~
 EndLine -> ;
