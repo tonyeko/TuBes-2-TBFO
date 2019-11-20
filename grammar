@@ -1,7 +1,9 @@
-S -> S S | Inside
+S -> Inside S | InsideNoEOL | Inside
 
-Inside -> Assign | VarKons EOL | Operasi EOL | If | Loop | Import | Fungsi | Class
-InsideTab -> TAB Inside | TABS EOL
+Inside -> Assign | VarKons EOL | Operasi EOL | If EOL | Loop EOL | Import EOL | Fungsi EOL | Class EOL
+InsideNoEOL -> AssignNoEOL | VarKons | Operasi | If | Loop | Import | Fungsi | Class
+InsideTab -> TAB Inside InsideTab | InsideEndTab
+InsideEndTab -> TAB Inside | TABS EOL | TAB InsideNoEOL
 
 Alphabets -> 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z'
 
@@ -9,11 +11,11 @@ Digits -> '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
 
 Others -> '!' | '#' | '$' | '%' | '&' | '(' | ')' | '*' | '+' | ',' | '-' | '.' | '/' | ':' | ';' | '<' | '=' | '>' | '?' | '@' | '[' | '\' | ']' | '^' | '_' | '`' | '{' | '|' | '}' | '~' | ' '
 
-Space -> Space Space | ' '
+Space -> Space Space | '~'
 SpaceOrEmpty -> Space | EEE
 
-EOL -> '\n'
-TAB -> '\t'
+EOL -> ';'
+TAB -> '$'
 TABS -> TAB TABS | EEE
 Angka -> Angka Angka | Digits
 
@@ -42,6 +44,7 @@ VarOrBintang -> Var | '*'
 Import -> 'i' 'm' 'p' 'o' 'r' 't' Space Var | 'f' 'r' 'o' 'm' Space Var Space 'i' 'm' 'p' 'o' 'r' 't' Space VarOrBintang
 
 Assign -> ArgsAssign SpaceOrEmpty SamaDengan SpaceOrEmpty Operasi SpaceOrEmpty EOL
+AssignNoEOL -> ArgsAssign SpaceOrEmpty SamaDengan SpaceOrEmpty Operasi SpaceOrEmpty
 
 Fungsi -> HeadFungsi InsideFungsi
 
@@ -68,8 +71,8 @@ Boolean -> Boolean SpaceOrEmpty OperasiBoolean SpaceOrEmpty Boolean | Operasi
 
 OperasiBoolean -> 'a' 'n' 'd' | 'o' 'r' | '=' '=' | '!' '='
 
-If -> HeadIf InsideTab Elif | HeadIF InsideTab Else
-Elif -> 'e' 'l' HeadIf InsideTab Elif | HeadIf InsideTab Else
+If -> HeadIf InsideTab Elif | HeadIF InsideTab Else | HeadIf InsideTab
+Elif -> 'e' 'l' HeadIf InsideTab Elif | 'e' 'l' HeadIf InsideTab Else | 'e' 'l' HeadIf InsideTab
 Else -> HeadElse InsideTab
 
 HeadIf -> 'i' 'f' Kondisi ':' SpaceOrEmpty EOL

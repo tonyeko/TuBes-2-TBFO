@@ -8,8 +8,9 @@ import itertools
 def prods_more_than_two(prod):
     if (len(prod) > 2):
         found = False
+        a = prods_more_than_two(prod[1:])
         for cnf in cnfs:
-            if (' '.join(prods_more_than_two(prod[1:3])) == cnf.split(' -> ')[1]):
+            if (' '.join(a) == cnf.split(' -> ')[1]):
                 found = True
                 newvar = cnf.split(' -> ')[0]
                 break
@@ -18,7 +19,7 @@ def prods_more_than_two(prod):
             it = i[0] + 1
             i.pop(0)
             i.append(it)
-            res = prods_more_than_two(prod[1:])
+            res = a
             cnfs.append(newvar+" -> "+res[0]+" "+res[1])
         return [prod[0], newvar]
     else:
@@ -82,6 +83,19 @@ def parsing_cfg(cfg):
         prods_res += parsing_cfg_prod(prod)
     return symbol + ' -> ' + ' | '.join(list(dict.fromkeys(prods_res)))
 
+def remove_epsilon_rec(symbol, x, prods2):
+    if (x != []):
+        z = 0
+        a = x.copy()
+        while (z < len(a)):
+            if (a[z] == symbol):
+                a.pop(z)
+                prods2 = remove_epsilon_rec(symbol, a, prods2)
+                prods2.append(' '.join(a))
+                a = a[:z] + [symbol]  + a[z:] 
+            z += 1
+    return prods2
+
 def remove_epsilon_prod(cfg):
     desc = cfg.split("->")
     symbol = desc[0].replace(' ','')
@@ -100,16 +114,15 @@ def remove_epsilon_prod(cfg):
                 if (symbol in prods2[k]):
                     x = list(filter(None,map(lambda x: x.replace(' ', '').replace('\n',''), prods2[k].split(" "))))
                     if (len(x) > 1):
-                        while (x.count(symbol)):
-                            z = 0
-                            a = x.copy()
-                            while (z < len(a)):
-                                if (a[z] == symbol):
-                                    a.pop(z)
-                                    z -= 1
-                                    prods2.append(' '.join(a))
-                                z += 1
-                            x.remove(symbol)
+                        z = 0
+                        a = x.copy()
+                        while (z < len(a)):
+                            if (a[z] == symbol):
+                                a.pop(z)
+                                prods2 = remove_epsilon_rec(symbol, a, prods2)
+                                prods2.append(' '.join(a))
+                                a = a[:z] + [symbol] + a[z:] 
+                            z += 1
                         cfgs[j] = symbol2 + ' -> ' + ' | '.join(list(dict.fromkeys(prods2)))
                     else:
                         prods2.append('EEE')
@@ -160,7 +173,7 @@ if (len(sys.argv) > 1):
     for cfg in cfgs:
         if ('EEE' in cfg):
             remove_epsilon_prod(cfg)
-    #print('\n'.join(cfgs))
+    print('\n'.join(cfgs))
     for cfg in cfgs[1:]:
         remove_useless_prod(cfg)
     #print('\n'.join(cfgs))

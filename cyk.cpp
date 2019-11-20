@@ -8,7 +8,7 @@
 using namespace std;
 int main()
 {
-    string filename = "cyk.dat";
+    string filename = "chowsky";
     string inputfile;
     cin >> inputfile;
     ifstream ifs(filename);
