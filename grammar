@@ -1,0 +1,89 @@
+S -> Inside S | InsideNoEOL | Inside
+
+Inside -> Assign | VarKons EOL | Operasi EOL | If EOL | Loop EOL | Import EOL | Fungsi EOL | Class EOL
+InsideNoEOL -> AssignNoEOL | VarKons | Operasi | If | Loop | Import | Fungsi | Class
+InsideTab -> TAB Inside InsideTab | InsideEndTab
+InsideEndTab -> TAB Inside | TABS EOL | TAB InsideNoEOL
+
+Alphabets -> 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z'
+
+Digits -> '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
+
+Others -> '!' | '#' | '$' | '%' | '&' | '(' | ')' | '*' | '+' | ',' | '-' | '.' | '/' | ':' | ';' | '<' | '=' | '>' | '?' | '@' | '[' | '\' | ']' | '^' | '_' | '`' | '{' | '|' | '}' | '~' | ' '
+
+Space -> Space Space | '~'
+SpaceOrEmpty -> Space | EEE
+
+EOL -> ';'
+TAB -> '$'
+TABS -> TAB TABS | EEE
+Angka -> Angka Angka | Digits
+
+CharList0 -> Alphabets | '_'
+CharList1 -> Alphabets | Digits | Others | '''
+CharList2 -> Alphabets | Digits | Others | '""
+CharList3 -> Alphabets | Digits | Others | ''' | '"'
+
+Var -> CharList0 Alphanum | CharList0 | VarKons '[' VarKons ']'
+Alphanum -> Alphanum Alphanum | CharList0 | Digits
+
+Kons -> Angka | '"' CharList1 '"' | ''' CharList2 ''' | ''' ''' ''' CharList3 ''' ''' ''' | Array
+
+Array -> '[' SpaceOrEmpty VarKons SpaceOrEmpty LoopOrNot ']'
+LoopOrNot -> HeadFor2 VarKons SpaceOrEmpty | HeadFor2 'r' 'a' 'n' 'g' 'e' SpaceOrEmpty '(' SpaceOrEmpty VarKons SpaceOrEmpty ')' SpaceOrEmpty
+
+Operasi -> Operasi SpaceOrEmpty Operator SpaceOrEmpty Operasi | VarKons | PanggilFungsi | ArgsCall
+
+Operator -> '+' | '-' | '*' | '/' | '//'
+
+VarKons -> Var | Kons
+
+SamaDengan -> '=' | Operator '='
+
+VarOrBintang -> Var | '*'
+Import -> 'i' 'm' 'p' 'o' 'r' 't' Space Var | 'f' 'r' 'o' 'm' Space Var Space 'i' 'm' 'p' 'o' 'r' 't' Space VarOrBintang
+
+Assign -> ArgsAssign SpaceOrEmpty SamaDengan SpaceOrEmpty Operasi SpaceOrEmpty EOL
+AssignNoEOL -> ArgsAssign SpaceOrEmpty SamaDengan SpaceOrEmpty Operasi SpaceOrEmpty
+
+Fungsi -> HeadFungsi InsideFungsi
+
+InsideFungsi -> InsideTab InsideReturn | InsideReturn | InsideTab
+InsideReturn -> 'r' 'e' 't' 'u' 'r' 'n' Space Operasi SpaceOrEmpty EOL
+
+PanggilFungsi -> Var ParamsCall
+
+ArgsCall -> VarKons SpaceOrEmpty ',' SpaceOrEmpty ArgsCall | VarKons
+ArgsAssign -> Var SpaceOrEmpty ',' SpaceOrEmpty ArgsAssign | Var
+ArgsFungsi -> Var SpaceOrEmpty HintOrEmpty ',' SpaceOrEmpty ArgsFungsi | Var HintOrEmpty
+
+HintOrEmpty -> SpaceOrEmpty ':' SpaceOrEmpty Var | EEE
+Hint2OrEmpty -> '-' '>' SpaceOrEmpty Var SpaceOrEmpty
+
+Params -> SpaceOrEmpty '(' SpaceOrEmpty ArgsFungsi SpaceOrEmpty ')' SpaceOrEmpty Hint2OrEmpty
+ParamsCall -> SpaceOrEmpty '(' SpaceOrEmpty ArgsCall SpaceOrEmpty ')' SpaceOrEmpty
+
+HeadFungsi -> 'd' 'e' 'f' Space Var Params ':' SpaceOrEmpty EOL
+
+Kondisi -> SpaceOrEmpty '(' SpaceOrEmpty Boolean SpaceOrEmpty ')' SpaceOrEmpty | SpaceOrEmpty Boolean SpaceOrEmpty
+
+Boolean -> Boolean SpaceOrEmpty OperasiBoolean SpaceOrEmpty Boolean | Operasi
+
+OperasiBoolean -> 'a' 'n' 'd' | 'o' 'r' | '=' '=' | '!' '='
+
+If -> HeadIf InsideTab Elif | HeadIF InsideTab Else | HeadIf InsideTab
+Elif -> 'e' 'l' HeadIf InsideTab Elif | 'e' 'l' HeadIf InsideTab Else | 'e' 'l' HeadIf InsideTab
+Else -> HeadElse InsideTab
+
+HeadIf -> 'i' 'f' Kondisi ':' SpaceOrEmpty EOL
+HeadElse -> 'e' 'l' 's' 'e' SpaceOrEmpty ':' SpaceOrEmpty EOL
+
+Loop -> HeadFor InsideTab | HeadWhile InsideTab
+
+HeadWhile -> 'w' 'h' 'i' 'l' 'e' Kondisi ':' SpaceOrEmpty EOL
+HeadFor -> HeadFor2 VarKons SpaceOrEmpty ':' SpaceOrEmpty EOL | HeadFor2 'r' 'a' 'n' 'g' 'e' SpaceOrEmpty '(' SpaceOrEmpty VarKons SpaceOrEmpty ')' SpaceOrEmpty ':' SpaceOrEmpty EOL
+HeadFor2 -> 'f' 'o' 'r' Space Var Space 'i' 'n' Space
+
+Class -> HeadClass InsideClass
+InsideClass -> TAB Fungsi
+HeadClass -> 'c' 'l' 'a' 's' 's' Space Var SpaceOrEmpty '(' SpaceOrEmpty ')' SpaceOrEmpty ':' SpaceOrEmpty EOL | 'c' 'l' 'a' 's' 's' Space Var SpaceOrEmpty ':' SpaceOrEmpty EOL
