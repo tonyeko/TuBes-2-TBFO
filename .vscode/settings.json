@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.pl": "elpi",
+        "fstream": "cpp"
+    }
+}
