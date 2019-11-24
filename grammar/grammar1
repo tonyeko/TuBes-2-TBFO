@@ -71,7 +71,7 @@ Boolean -> Boolean SpaceOrEmpty OperasiBoolean SpaceOrEmpty Boolean | Operasi
 
 OperasiBoolean -> 'a' 'n' 'd' | 'o' 'r' | '=' '=' | '!' '='
 
-If -> HeadIf InsideTab Elif | HeadIF InsideTab Else | HeadIf InsideTab
+If -> HeadIf InsideTab Elif | HeadIf InsideTab Else | HeadIf InsideTab
 Elif -> 'e' 'l' HeadIf InsideTab Elif | 'e' 'l' HeadIf InsideTab Else | 'e' 'l' HeadIf InsideTab
 Else -> HeadElse InsideTab
 

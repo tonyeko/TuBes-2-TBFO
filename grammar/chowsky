@@ -1,4 +1,4 @@
-S -> Inside S | ArgsAssign a3 | ArgsAssign a4 | ArgsAssign a5 | ArgsAssign a7 | ArgsAssign a2 | ArgsAssign a8 | ArgsAssign a9 | ArgsAssign a10 | CharList0 Alphanum | a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z | A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z | _ | VarKons a14 | Angka Angka | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | a15 a16 | a17 a18 | a17 a23 | a11 a27 | a11 a28 | a11 a26 | a11 a29 | Operasi a31 | Var ParamsCall | VarKons a35 | VarKons a36 | VarKons a34 | VarKons a37 | Operasi a38 | Operasi a30 | Operasi a39 | HeadIf a40 | HeadIF a41 | HeadIf InsideTab | HeadFor2 a42 | HeadFor2 a60 | HeadFor2 VarKons | HeadFor2 a67 | HeadFor2 a74 | HeadFor2 a82 | HeadFor2 a88 | HeadFor2 a95 | HeadFor2 a102 | HeadFor2 a109 | HeadFor2 a114 | HeadFor2 a120 | HeadFor2 a126 | HeadFor2 a132 | HeadFor2 a138 | HeadFor2 a144 | HeadFor2 a150 | HeadFor2 a156 | a157 a167 | a168 a181 | HeadFungsi InsideFungsi | HeadClass InsideClass | ArgsAssign a186 | ArgsAssign a188 | ArgsAssign a189 | ArgsAssign a191 | ArgsAssign a185 | ArgsAssign a192 | ArgsAssign a193 | ArgsAssign a194 | VarKons EOL | Operasi EOL | If EOL | Loop EOL | Import EOL | Fungsi EOL | Class EOL
+S -> Inside S | ArgsAssign a3 | ArgsAssign a4 | ArgsAssign a5 | ArgsAssign a7 | ArgsAssign a2 | ArgsAssign a8 | ArgsAssign a9 | ArgsAssign a10 | CharList0 Alphanum | 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' | '_' | VarKons a14 | Angka Angka | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | a15 a16 | a17 a18 | a17 a23 | a11 a27 | a11 a28 | a11 a26 | a11 a29 | Operasi a31 | Var ParamsCall | VarKons a35 | VarKons a36 | VarKons a34 | VarKons a37 | Operasi a38 | Operasi a30 | Operasi a39 | HeadIf a40 | HeadIf a41 | HeadIf InsideTab | HeadFor2 a42 | HeadFor2 a60 | HeadFor2 VarKons | HeadFor2 a67 | HeadFor2 a74 | HeadFor2 a82 | HeadFor2 a88 | HeadFor2 a95 | HeadFor2 a102 | HeadFor2 a109 | HeadFor2 a114 | HeadFor2 a120 | HeadFor2 a126 | HeadFor2 a132 | HeadFor2 a138 | HeadFor2 a144 | HeadFor2 a150 | HeadFor2 a156 | a157 a167 | a168 a181 | HeadFungsi InsideFungsi | HeadClass InsideClass | ArgsAssign a186 | ArgsAssign a188 | ArgsAssign a189 | ArgsAssign a191 | ArgsAssign a185 | ArgsAssign a192 | ArgsAssign a193 | ArgsAssign a194 | VarKons EOL | Operasi EOL | If EOL | Loop EOL | Import EOL | Fungsi EOL | Class EOL
 a0 -> Operasi SpaceOrEmpty
 a1 -> SpaceOrEmpty a0
 a2 -> SamaDengan a1
@@ -10,13 +10,13 @@ a7 -> SamaDengan a6
 a8 -> SpaceOrEmpty a4
 a9 -> SpaceOrEmpty a5
 a10 -> SpaceOrEmpty a7
-a11 -> [
-a12 -> ]
+a11 -> '['
+a12 -> ']'
 a13 -> VarKons a12
 a14 -> a11 a13
-a15 -> "
+a15 -> '"'
 a16 -> CharList1 a15
-a17 -> 
+a17 -> '''
 a18 -> CharList2 a17
 a19 -> a17 a17
 a20 -> a17 a19
@@ -31,7 +31,7 @@ a28 -> VarKons a24
 a29 -> SpaceOrEmpty a28
 a30 -> Operator a6
 a31 -> SpaceOrEmpty a30
-a32 -> ,
+a32 -> ','
 a33 -> SpaceOrEmpty ArgsCall
 a34 -> a32 a33
 a35 -> SpaceOrEmpty a34
@@ -42,13 +42,13 @@ a39 -> SpaceOrEmpty a38
 a40 -> InsideTab Elif
 a41 -> InsideTab Else
 a42 -> VarKons SpaceOrEmpty
-a43 -> r
-a44 -> a
-a45 -> n
-a46 -> g
-a47 -> e
-a48 -> (
-a49 -> )
+a43 -> 'r'
+a44 -> 'a'
+a45 -> 'n'
+a46 -> 'g'
+a47 -> 'e'
+a48 -> '('
+a49 -> ')'
 a50 -> a49 SpaceOrEmpty
 a51 -> SpaceOrEmpty a50
 a52 -> VarKons a51
@@ -156,18 +156,18 @@ a153 -> a46 a152
 a154 -> a45 a153
 a155 -> a44 a154
 a156 -> a43 a155
-a157 -> i
-a158 -> m
-a159 -> p
-a160 -> o
-a161 -> t
+a157 -> 'i'
+a158 -> 'm'
+a159 -> 'p'
+a160 -> 'o'
+a161 -> 't'
 a162 -> Space Var
 a163 -> a161 a162
 a164 -> a43 a163
 a165 -> a160 a164
 a166 -> a159 a165
 a167 -> a158 a166
-a168 -> f
+a168 -> 'f'
 a169 -> Space VarOrBintang
 a170 -> a161 a169
 a171 -> a43 a170
@@ -195,47 +195,47 @@ a192 -> SpaceOrEmpty a188
 a193 -> SpaceOrEmpty a189
 a194 -> SpaceOrEmpty a191
 Inside -> ArgsAssign a186 | ArgsAssign a188 | ArgsAssign a189 | ArgsAssign a191 | ArgsAssign a185 | ArgsAssign a192 | ArgsAssign a193 | ArgsAssign a194 | VarKons EOL | Operasi EOL | If EOL | Loop EOL | Import EOL | Fungsi EOL | Class EOL
-InsideNoEOL -> ArgsAssign a3 | ArgsAssign a4 | ArgsAssign a5 | ArgsAssign a7 | ArgsAssign a2 | ArgsAssign a8 | ArgsAssign a9 | ArgsAssign a10 | CharList0 Alphanum | a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z | A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z | _ | VarKons a14 | Angka Angka | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | a15 a16 | a17 a18 | a17 a23 | a11 a27 | a11 a28 | a11 a26 | a11 a29 | Operasi a31 | Var ParamsCall | VarKons a35 | VarKons a36 | VarKons a34 | VarKons a37 | Operasi a38 | Operasi a30 | Operasi a39 | HeadIf a40 | HeadIF a41 | HeadIf InsideTab | HeadFor2 a42 | HeadFor2 a60 | HeadFor2 VarKons | HeadFor2 a67 | HeadFor2 a74 | HeadFor2 a82 | HeadFor2 a88 | HeadFor2 a95 | HeadFor2 a102 | HeadFor2 a109 | HeadFor2 a114 | HeadFor2 a120 | HeadFor2 a126 | HeadFor2 a132 | HeadFor2 a138 | HeadFor2 a144 | HeadFor2 a150 | HeadFor2 a156 | a157 a167 | a168 a181 | HeadFungsi InsideFungsi | HeadClass InsideClass
+InsideNoEOL -> ArgsAssign a3 | ArgsAssign a4 | ArgsAssign a5 | ArgsAssign a7 | ArgsAssign a2 | ArgsAssign a8 | ArgsAssign a9 | ArgsAssign a10 | CharList0 Alphanum | 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' | '_' | VarKons a14 | Angka Angka | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | a15 a16 | a17 a18 | a17 a23 | a11 a27 | a11 a28 | a11 a26 | a11 a29 | Operasi a31 | Var ParamsCall | VarKons a35 | VarKons a36 | VarKons a34 | VarKons a37 | Operasi a38 | Operasi a30 | Operasi a39 | HeadIf a40 | HeadIf a41 | HeadIf InsideTab | HeadFor2 a42 | HeadFor2 a60 | HeadFor2 VarKons | HeadFor2 a67 | HeadFor2 a74 | HeadFor2 a82 | HeadFor2 a88 | HeadFor2 a95 | HeadFor2 a102 | HeadFor2 a109 | HeadFor2 a114 | HeadFor2 a120 | HeadFor2 a126 | HeadFor2 a132 | HeadFor2 a138 | HeadFor2 a144 | HeadFor2 a150 | HeadFor2 a156 | a157 a167 | a168 a181 | HeadFungsi InsideFungsi | HeadClass InsideClass
 a195 -> Inside InsideTab
-InsideTab -> TAB a195 | TAB Inside | TABS EOL | TAB InsideNoEOL | ;
-InsideEndTab -> TAB Inside | TABS EOL | TAB InsideNoEOL | ;
-Alphabets -> a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z | A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z
-Digits -> 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
-a196 -> 
-a197 -> 
-Others -> ! | # | $ | % | & | ( | ) | * | + | , | - | . | / | : | ; | < | = | > | ? | @ | [ | \ | ] | ^ | _ | ` | { |  | } | ~ | a196 a197
-Space -> Space Space | ~
-SpaceOrEmpty -> Space Space | ~
-EOL -> ;
-TAB -> $
-TABS -> TAB TABS | $
-Angka -> Angka Angka | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
-CharList0 -> a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z | A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z | _
-a198 -> 
-a199 -> 
-CharList1 -> a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z | A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | ! | # | $ | % | & | ( | ) | * | + | , | - | . | / | : | ; | < | = | > | ? | @ | [ | \ | ] | ^ | _ | ` | { |  | } | ~ | a198 a199 | 
-a200 -> 
-a201 -> 
-CharList2 -> a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z | A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | ! | # | $ | % | & | ( | ) | * | + | , | - | . | / | : | ; | < | = | > | ? | @ | [ | \ | ] | ^ | _ | ` | { |  | } | ~ | a200 a201 | ""
-a202 -> 
-a203 -> 
-CharList3 -> a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z | A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | ! | # | $ | % | & | ( | ) | * | + | , | - | . | / | : | ; | < | = | > | ? | @ | [ | \ | ] | ^ | _ | ` | { |  | } | ~ | a202 a203 |  | "
-Var -> CharList0 Alphanum | a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z | A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z | _ | VarKons a14
-Alphanum -> Alphanum Alphanum | a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z | A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z | _ | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
-Kons -> Angka Angka | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | a15 a16 | a17 a18 | a17 a23 | a11 a27 | a11 a28 | a11 a26 | a11 a29
+InsideTab -> TAB a195 | TAB Inside | TABS EOL | TAB InsideNoEOL | ';'
+InsideEndTab -> TAB Inside | TABS EOL | TAB InsideNoEOL | ';'
+Alphabets -> 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z'
+Digits -> '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
+a196 -> ''
+a197 -> ''
+Others -> '!' | '#' | '$' | '%' | '&' | '(' | ')' | '*' | '+' | ',' | '-' | '.' | '/' | ':' | ';' | '<' | '=' | '>' | '?' | '@' | '[' | '\' | ']' | '^' | '_' | '`' | '{' | ' | '}' | '~' | a196 a197
+Space -> Space Space | '~'
+SpaceOrEmpty -> Space Space | '~'
+EOL -> ';'
+TAB -> '$'
+TABS -> TAB TABS | '$'
+Angka -> Angka Angka | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
+CharList0 -> 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' | '_'
+a198 -> ''
+a199 -> ''
+CharList1 -> 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '!' | '#' | '$' | '%' | '&' | '(' | ')' | '*' | '+' | ',' | '-' | '.' | '/' | ':' | ';' | '<' | '=' | '>' | '?' | '@' | '[' | '\' | ']' | '^' | '_' | '`' | '{' | ' | '}' | '~' | a198 a199 | '''
+a200 -> ''
+a201 -> ''
+CharList2 -> 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '!' | '#' | '$' | '%' | '&' | '(' | ')' | '*' | '+' | ',' | '-' | '.' | '/' | ':' | ';' | '<' | '=' | '>' | '?' | '@' | '[' | '\' | ']' | '^' | '_' | '`' | '{' | ' | '}' | '~' | a200 a201 | '""
+a202 -> ''
+a203 -> ''
+CharList3 -> 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '!' | '#' | '$' | '%' | '&' | '(' | ')' | '*' | '+' | ',' | '-' | '.' | '/' | ':' | ';' | '<' | '=' | '>' | '?' | '@' | '[' | '\' | ']' | '^' | '_' | '`' | '{' | ' | '}' | '~' | a202 a203 | ''' | '"'
+Var -> CharList0 Alphanum | 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' | '_' | VarKons a14
+Alphanum -> Alphanum Alphanum | 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' | '_' | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
+Kons -> Angka Angka | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | a15 a16 | a17 a18 | a17 a23 | a11 a27 | a11 a28 | a11 a26 | a11 a29
 Array -> a11 a27 | a11 a28 | a11 a26 | a11 a29
 LoopOrNot -> HeadFor2 a42 | HeadFor2 a60 | HeadFor2 VarKons | HeadFor2 a67 | HeadFor2 a74 | HeadFor2 a82 | HeadFor2 a88 | HeadFor2 a95 | HeadFor2 a102 | HeadFor2 a109 | HeadFor2 a114 | HeadFor2 a120 | HeadFor2 a126 | HeadFor2 a132 | HeadFor2 a138 | HeadFor2 a144 | HeadFor2 a150 | HeadFor2 a156
-Operasi -> Operasi a31 | CharList0 Alphanum | a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z | A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z | _ | VarKons a14 | Angka Angka | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | a15 a16 | a17 a18 | a17 a23 | a11 a27 | a11 a28 | a11 a26 | a11 a29 | Var ParamsCall | VarKons a35 | VarKons a36 | VarKons a34 | VarKons a37 | Operasi a38 | Operasi a30 | Operasi a39
-Operator -> + | - | * | / | //
-VarKons -> CharList0 Alphanum | a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z | A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z | _ | VarKons a14 | Angka Angka | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | a15 a16 | a17 a18 | a17 a23 | a11 a27 | a11 a28 | a11 a26 | a11 a29
-a204 -> =
-SamaDengan -> = | Operator a204
-VarOrBintang -> CharList0 Alphanum | a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z | A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z | _ | VarKons a14 | *
+Operasi -> Operasi a31 | CharList0 Alphanum | 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' | '_' | VarKons a14 | Angka Angka | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | a15 a16 | a17 a18 | a17 a23 | a11 a27 | a11 a28 | a11 a26 | a11 a29 | Var ParamsCall | VarKons a35 | VarKons a36 | VarKons a34 | VarKons a37 | Operasi a38 | Operasi a30 | Operasi a39
+Operator -> '+' | '-' | '*' | '/' | '//'
+VarKons -> CharList0 Alphanum | 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' | '_' | VarKons a14 | Angka Angka | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | a15 a16 | a17 a18 | a17 a23 | a11 a27 | a11 a28 | a11 a26 | a11 a29
+a204 -> '='
+SamaDengan -> '=' | Operator a204
+VarOrBintang -> CharList0 Alphanum | 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' | '_' | VarKons a14 | '*'
 Import -> a157 a167 | a168 a181
 Assign -> ArgsAssign a186 | ArgsAssign a188 | ArgsAssign a189 | ArgsAssign a191 | ArgsAssign a185 | ArgsAssign a192 | ArgsAssign a193 | ArgsAssign a194
 AssignNoEOL -> ArgsAssign a3 | ArgsAssign a4 | ArgsAssign a5 | ArgsAssign a7 | ArgsAssign a2 | ArgsAssign a8 | ArgsAssign a9 | ArgsAssign a10
 Fungsi -> HeadFungsi InsideFungsi
-a205 -> u
+a205 -> 'u'
 a206 -> Space a183
 a207 -> a45 a206
 a208 -> a43 a207
@@ -248,16 +248,16 @@ a214 -> a43 a213
 a215 -> a205 a214
 a216 -> a161 a215
 a217 -> a47 a216
-InsideFungsi -> InsideTab InsideReturn | a43 a211 | a43 a217 | TAB a195 | TAB Inside | TABS EOL | TAB InsideNoEOL | ;
+InsideFungsi -> InsideTab InsideReturn | a43 a211 | a43 a217 | TAB a195 | TAB Inside | TABS EOL | TAB InsideNoEOL | ';'
 InsideReturn -> a43 a211 | a43 a217
 PanggilFungsi -> Var ParamsCall
-ArgsCall -> VarKons a35 | CharList0 Alphanum | a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z | A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z | _ | VarKons a14 | Angka Angka | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | a15 a16 | a17 a18 | a17 a23 | a11 a27 | a11 a28 | a11 a26 | a11 a29 | VarKons a36 | VarKons a34 | VarKons a37
+ArgsCall -> VarKons a35 | CharList0 Alphanum | 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' | '_' | VarKons a14 | Angka Angka | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | a15 a16 | a17 a18 | a17 a23 | a11 a27 | a11 a28 | a11 a26 | a11 a29 | VarKons a36 | VarKons a34 | VarKons a37
 a218 -> SpaceOrEmpty ArgsAssign
 a219 -> a32 a218
 a220 -> SpaceOrEmpty a219
 a221 -> a32 ArgsAssign
 a222 -> SpaceOrEmpty a221
-ArgsAssign -> Var a220 | CharList0 Alphanum | a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z | A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z | _ | VarKons a14 | Var a221 | Var a219 | Var a222
+ArgsAssign -> Var a220 | CharList0 Alphanum | 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' | '_' | VarKons a14 | Var a221 | Var a219 | Var a222
 a223 -> SpaceOrEmpty ArgsFungsi
 a224 -> a32 a223
 a225 -> HintOrEmpty a224
@@ -267,14 +267,14 @@ a228 -> HintOrEmpty a227
 a229 -> SpaceOrEmpty a228
 a230 -> SpaceOrEmpty a224
 a231 -> SpaceOrEmpty a227
-ArgsFungsi -> Var a226 | Var HintOrEmpty | Var a228 | Var a225 | Var a229 | Var a230 | CharList0 Alphanum | a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z | A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z | _ | VarKons a14 | Var a227 | Var a224 | Var a231
-a232 -> :
+ArgsFungsi -> Var a226 | Var HintOrEmpty | Var a228 | Var a225 | Var a229 | Var a230 | CharList0 Alphanum | 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' | '_' | VarKons a14 | Var a227 | Var a224 | Var a231
+a232 -> ':'
 a233 -> SpaceOrEmpty Var
 a234 -> a232 a233
 a235 -> a232 Var
 HintOrEmpty -> SpaceOrEmpty a234 | a232 Var | a232 a233 | SpaceOrEmpty a235
-a236 -> -
-a237 -> >
+a236 -> '-'
+a237 -> '>'
 a238 -> Var SpaceOrEmpty
 a239 -> SpaceOrEmpty a238
 a240 -> a237 a239
@@ -321,7 +321,7 @@ a278 -> a48 a271
 a279 -> a48 a272
 a280 -> a48 a273
 ParamsCall -> SpaceOrEmpty a267 | a48 a268 | a48 a269 | a48 a270 | a48 a265 | a48 a271 | a48 a272 | a48 a273 | a48 a266 | SpaceOrEmpty a274 | SpaceOrEmpty a275 | SpaceOrEmpty a276 | SpaceOrEmpty a277 | SpaceOrEmpty a278 | SpaceOrEmpty a279 | SpaceOrEmpty a280
-a281 -> d
+a281 -> 'd'
 a282 -> a232 a182
 a283 -> Params a282
 a284 -> Var a283
@@ -357,13 +357,13 @@ a312 -> OperasiBoolean a311
 a313 -> SpaceOrEmpty a312
 a314 -> OperasiBoolean Boolean
 a315 -> SpaceOrEmpty a314
-Kondisi -> SpaceOrEmpty a296 | SpaceOrEmpty a297 | a48 a298 | a48 a299 | a48 a300 | a48 a294 | a48 a301 | a48 a302 | a48 a303 | a48 a295 | SpaceOrEmpty a304 | SpaceOrEmpty a305 | SpaceOrEmpty a306 | SpaceOrEmpty a307 | SpaceOrEmpty a308 | SpaceOrEmpty a309 | SpaceOrEmpty a310 | Boolean a313 | Operasi a31 | CharList0 Alphanum | a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z | A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z | _ | VarKons a14 | Angka Angka | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | a15 a16 | a17 a18 | a17 a23 | a11 a27 | a11 a28 | a11 a26 | a11 a29 | Var ParamsCall | VarKons a35 | VarKons a36 | VarKons a34 | VarKons a37 | Operasi a38 | Operasi a30 | Operasi a39 | Boolean a314 | Boolean a312 | Boolean a315 | Boolean SpaceOrEmpty | SpaceOrEmpty Boolean
-Boolean -> Boolean a313 | Operasi a31 | CharList0 Alphanum | a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z | A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z | _ | VarKons a14 | Angka Angka | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | a15 a16 | a17 a18 | a17 a23 | a11 a27 | a11 a28 | a11 a26 | a11 a29 | Var ParamsCall | VarKons a35 | VarKons a36 | VarKons a34 | VarKons a37 | Operasi a38 | Operasi a30 | Operasi a39 | Boolean a314 | Boolean a312 | Boolean a315
+Kondisi -> SpaceOrEmpty a296 | SpaceOrEmpty a297 | a48 a298 | a48 a299 | a48 a300 | a48 a294 | a48 a301 | a48 a302 | a48 a303 | a48 a295 | SpaceOrEmpty a304 | SpaceOrEmpty a305 | SpaceOrEmpty a306 | SpaceOrEmpty a307 | SpaceOrEmpty a308 | SpaceOrEmpty a309 | SpaceOrEmpty a310 | Boolean a313 | Operasi a31 | CharList0 Alphanum | 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' | '_' | VarKons a14 | Angka Angka | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | a15 a16 | a17 a18 | a17 a23 | a11 a27 | a11 a28 | a11 a26 | a11 a29 | Var ParamsCall | VarKons a35 | VarKons a36 | VarKons a34 | VarKons a37 | Operasi a38 | Operasi a30 | Operasi a39 | Boolean a314 | Boolean a312 | Boolean a315 | Boolean SpaceOrEmpty | SpaceOrEmpty Boolean
+Boolean -> Boolean a313 | Operasi a31 | CharList0 Alphanum | 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' | '_' | VarKons a14 | Angka Angka | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | a15 a16 | a17 a18 | a17 a23 | a11 a27 | a11 a28 | a11 a26 | a11 a29 | Var ParamsCall | VarKons a35 | VarKons a36 | VarKons a34 | VarKons a37 | Operasi a38 | Operasi a30 | Operasi a39 | Boolean a314 | Boolean a312 | Boolean a315
 a316 -> a45 a281
-a317 -> !
+a317 -> '!'
 OperasiBoolean -> a44 a316 | a160 a43 | a204 a204 | a317 a204
-If -> HeadIf a40 | HeadIF a41 | HeadIf InsideTab
-a318 -> l
+If -> HeadIf a40 | HeadIf a41 | HeadIf InsideTab
+a318 -> 'l'
 a319 -> HeadIf a40
 a320 -> a318 a319
 a321 -> HeadIf a41
@@ -377,7 +377,7 @@ a326 -> a168 a325
 a327 -> Kondisi a288
 a328 -> a168 a327
 HeadIf -> a157 a326 | a157 a328
-a329 -> s
+a329 -> 's'
 a330 -> SpaceOrEmpty a282
 a331 -> a47 a330
 a332 -> a329 a331
@@ -394,8 +394,8 @@ a342 -> a329 a341
 a343 -> a318 a342
 HeadElse -> a47 a333 | a47 a336 | a47 a339 | a47 a343
 Loop -> HeadFor InsideTab | HeadWhile InsideTab
-a344 -> w
-a345 -> h
+a344 -> 'w'
+a345 -> 'h'
 a346 -> a47 a325
 a347 -> a318 a346
 a348 -> a157 a347
@@ -636,7 +636,7 @@ a580 -> a160 a579
 HeadFor2 -> a168 a580
 Class -> HeadClass InsideClass
 InsideClass -> TAB Fungsi
-a581 -> c
+a581 -> 'c'
 a582 -> a48 a356
 a583 -> SpaceOrEmpty a582
 a584 -> Var a583
