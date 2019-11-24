@@ -7,7 +7,7 @@ def read_lines(filename):
     all_lines = list()
     with open(filename, "r") as file:
         for line in file.readlines():
-            all_lines.append(line)
+            all_lines.append(line.replace("\n", ""))
     return all_lines
 
 class Rule:
@@ -35,6 +35,7 @@ def search_rules(grammar, right):
     matches = []
     for left in grammar.rules:
         for rule in grammar.rules[left]:
+            # print(rule)
             if rule == right:
                 matches.append(left)
     return matches
