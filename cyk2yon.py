@@ -1,4 +1,5 @@
 from collections import defaultdict
+import itertools
 import re
 
 GRAMMAR_RULES = "./grammar/chowsky"
@@ -33,19 +34,40 @@ class Grammar:
             if line == "\r" or line == '' or line[0] == '#':
                 continue
             rule = Rule(line)
-            self.rules[rule.left].append(rule.right)
-            for i in self.rules[rule.left][0]:
-                self.rules[rule.left].append(list(map(lambda x : x[1:-1] if ("'" in x) else x, i.split(" "))))
-            self.rules[rule.left] = self.rules[rule.left][1:]
+            for x in list(map(lambda x: x[0][1:-1] if (len(x) == 1) else "".join(x), map(lambda x: x.split(" "), rule.right))):
+                try:
+                    self.rules[x].append(rule.left)
+                except:
+                    self.rules[x] = [rule.left]
+        #print(self.rules)
+        #exit()
 
 def search_rules(grammar, right):
     matches = []
-    for left in grammar.rules:
-        for rule in grammar.rules[left]:
-            # print(rule)
-            if rule == right:
-                matches.append(left)
+    try:
+        matches = grammar.rules["".join(right)]
+    except:
+        matches = []
     return matches
+
+def recur_search(prods, grammar):
+    #print(prods)
+    if (len(prods) == 1):
+        return search_rules(grammar, prods[0])
+    elif (len(prods) == 2):
+        a = []
+        for i in list(itertools.product(list(filter(None,search_rules(grammar,prods[0]))),list(filter(None,search_rules(grammar,prods[1]))))):
+            a.append(search_rules(grammar,"".join(i)))
+        a = list(filter(None,a))
+        #print(a[0])
+        return a[0]
+    else:
+        a = []
+        for i in list(itertools.product(search_rules(grammar,prods[0]),recur_search(prods[1:],grammar))):
+            #print(i)
+            a.append(search_rules(grammar, "".join(i)))
+        return list(filter(None,a))[0]
+        
 
 def parse(sentence, grammar):
     #print("=========================")
@@ -62,13 +84,10 @@ def parse(sentence, grammar):
                 word[i] = 'x'
     words = ''.join(word)
     print(words)
-    # words = [i for i in sentence]
     for i in range(len(words)):
         #print(words[i], end=" ")
         if words[i] == ' ':
             words[i] = '~'          # Kalau dimasukkin ke line.replace ngeprintnya jadi jelek
-        if words[i] == '#':
-            break
         #print(words[i])
         # if i < len(words)-1:
         #     if words[i]+words[i+1] == '\t':
@@ -83,15 +102,35 @@ def parse(sentence, grammar):
     # Algoritma 1
     for column in range(len(words)):
         table[column][column] = search_rules(grammar, [words[column]])
-        #print(table[column][column])
         for row in reversed(range(column + 1)):
-            for s in range(row + 1, column + 1):
-                for non_terminal1 in table[row][s - 1]:
-                    for non_terminal2 in table[s][column]:
-                        non_term = [non_terminal1, non_terminal2]
+            for s in range(row + 1, (column + 1)):
+                for non_term in itertools.product(table[row][s - 1], table[s][column]):
                         table[row][column].extend(search_rules(grammar, non_term))
+    '''
+    for column in range(len(words)):
+        table[column][column] = search_rules(grammar, [words[column]])
+        #print(table[column][column])
+    '''
 
+    # Algoritma 2
+    '''
+    if (len(words) == 1):
+        table[0][len(table)-1] = search_rules(grammar, words)
+    else:
+        table[0][len(table)-1] = [j for i in filter(None, map(lambda x: search_rules(grammar, x), itertools.product(search_rules(grammar, [words[-2]]),search_rules(grammar, [words[-1]])))) for j in i]
+    print(table[0][len(table)-1])
+    i = len(words)-3
+    while (i >= 0):
+        #print(table[0][len(table)-1])
+        table[1][len(table)-1] = [j for k in filter(None, map(lambda x: search_rules(grammar, x), itertools.product(search_rules(grammar, [words[i]]), table[0][len(table)-1]))) for j in k]
+        if (table[1][len(table)-1] == []):
+            i -= 1
+    '''
+
+    print(table[0][len(table)-1])
+    #print(table[0][len(table)-1])
     for i in table[0][len(table)-1]:
+        #print(i, state[0])
         if state[0] in i:
             state.pop(0)
             state.append('Accepted2')
@@ -103,6 +142,8 @@ def parse(sentence, grammar):
 
     return table
 
+import time
+x = time.time()
 
 grammar = read_grammar(GRAMMAR_RULES)
 sentences = read_python_file(SENTENCES)
@@ -115,12 +156,12 @@ error = 0
 for i in range(len(sentences)):
     parse_table = parse(sentences[i], grammar)
     # Print Tabel
-    '''
+    
     for row in range(len(parse_table)):
         for col in range(len(parse_table)):
             print(parse_table[row][col], end="")
         print()
-    '''
+    
     print(realtext[i],end="    ")
     if not([] == list(filter(None,map(lambda x: x if ('Head' in x) else None, parse_table[0][-1])))):
         state.pop(0)
@@ -140,3 +181,5 @@ for i in range(len(sentences)):
 
 if (error == 0):
     print('Compile success!')
+
+print(time.time()-x)

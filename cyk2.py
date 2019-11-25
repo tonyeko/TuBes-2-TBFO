@@ -58,7 +58,7 @@ def recur_search(prods, grammar):
         for i in list(itertools.product(list(filter(None,search_rules(grammar,prods[0]))),list(filter(None,search_rules(grammar,prods[1]))))):
             a.append(search_rules(grammar,"".join(i)))
         a = list(filter(None,a))
-        print(a[0])
+        #print(a[0])
         return a[0]
     else:
         a = []
@@ -92,11 +92,33 @@ def parse(sentence, grammar):
     # Algoritma 1
     for column in range(len(words)):
         table[column][column] = search_rules(grammar, [words[column]])
+        for row in reversed(range(column + 1)):
+            for s in range(row + 1, (column + 1)):
+                for non_term in itertools.product(table[row][s - 1], table[s][column]):
+                        table[row][column].extend(search_rules(grammar, non_term))
+    '''
+    for column in range(len(words)):
+        table[column][column] = search_rules(grammar, [words[column]])
         #print(table[column][column])
+    '''
 
     # Algoritma 2
-    table[0][len(table)-1].extend(recur_search(words, grammar))
+    '''
+    if (len(words) == 1):
+        table[0][len(table)-1] = search_rules(grammar, words)
+    else:
+        table[0][len(table)-1] = [j for i in filter(None, map(lambda x: search_rules(grammar, x), itertools.product(search_rules(grammar, [words[-2]]),search_rules(grammar, [words[-1]])))) for j in i]
     print(table[0][len(table)-1])
+    i = len(words)-3
+    while (i >= 0):
+        #print(table[0][len(table)-1])
+        table[1][len(table)-1] = [j for k in filter(None, map(lambda x: search_rules(grammar, x), itertools.product(search_rules(grammar, [words[i]]), table[0][len(table)-1]))) for j in k]
+        if (table[1][len(table)-1] == []):
+            i -= 1
+    '''
+
+    #print(table[0][len(table)-1])
+    #print(table[0][len(table)-1])
     for i in table[0][len(table)-1]:
         #print(i, state[0])
         if state[0] in i:
@@ -149,4 +171,5 @@ for i in range(len(sentences)):
 
 if (error == 0):
     print('Compile success!')
+
 print(time.time()-x)
