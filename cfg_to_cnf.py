@@ -166,17 +166,45 @@ def remove_useless_prod(cfg):
         j = cfgs.index(cfg)
         cfgs.pop(j)
 
+def help():
+    print("Use: python cfg_to_cnf.py <filename> <flags>")
+    print("-e <mode>   | default mode is on, use mode 'off' to deactive epsilon production removal")
+    print("-u <mode>   | default mode is on, use mode 'off' to deactive useless production removal")
+
 i = [0]
 if (len(sys.argv) > 1):
-    cfgs = list(filter(None,map(lambda x: x.replace('\n','').replace('\r',''),open(sys.argv[1],'r').readlines())))
+    try:
+        cfgs = list(filter(None,map(lambda x: x.replace('\n','').replace('\r',''),open(sys.argv[1],'r').readlines())))
+    except:
+        help()
     cnfs = []
-    for cfg in cfgs:
-        if ('EEE' in cfg):
-            remove_epsilon_prod(cfg)
-    print('\n'.join(cfgs))
-    for cfg in cfgs[1:]:
-        remove_useless_prod(cfg)
-    #print('\n'.join(cfgs))
+    if ('-e' in sys.argv and sys.argv.index('-e') != 1 or not('-e' in sys.argv)):
+        try:
+            a = sys.argv.index('-e')
+        except:
+            a = 0
+        if (a != len(sys.argv)-1):
+            if (sys.argv[a+1] != 'off' or a == 0):
+                for cfg in cfgs:
+                    if ('EEE' in cfg):
+                        remove_epsilon_prod(cfg)
+                print('\n'.join(cfgs))
+        else:
+            help()
+            exit()
+    if ('-u' in sys.argv and sys.argv.index('-u') != 1 or not('-u' in sys.argv)):
+        try:
+            a = sys.argv.index('-u')
+        except:
+            a = 0
+        if (a != len(sys.argv)-1 or a == 0):
+            if (sys.argv[a+1] != 'off'):
+                for cfg in cfgs[1:]:
+                    remove_useless_prod(cfg)
+                print('\n'.join(cfgs))
+        else:
+            help()
+            exit()
     cnfs = [parsing_cfg(cfgs[0])] + cnfs
     for cfg in cfgs[1:]:
         #print(cfg)
@@ -191,4 +219,4 @@ if (len(sys.argv) > 1):
     cnfs.pop(i)
     cnfs = start + cnfs
     '''
-    open('chowsky','w').writelines(cnfs)
+    open('grammar/chowsky','w').writelines(cnfs)

@@ -1,7 +1,7 @@
 S -> Inside S | InsideNoEOL | Inside
 
-Inside -> Assign | VarKons EOL | Operasi EOL | If EOL | Loop EOL | Import EOL | Fungsi EOL | Class EOL
-InsideNoEOL -> AssignNoEOL | VarKons | Operasi | If | Loop | Import | Fungsi | Class
+Inside -> Assign | VarKons EOL | Boolean EOL | If EOL | Loop EOL | Import EOL | Fungsi EOL | Class EOL
+InsideNoEOL -> AssignNoEOL | VarKons | Boolean | If | Loop | Import | Fungsi | Class
 InsideTab -> TAB Inside InsideTab | InsideEndTab
 InsideEndTab -> TAB Inside | TABS EOL | TAB InsideNoEOL
 
@@ -32,9 +32,9 @@ Kons -> Angka | '"' CharList1 '"' | ''' CharList2 ''' | ''' ''' ''' CharList3 ''
 Array -> '[' SpaceOrEmpty VarKons SpaceOrEmpty LoopOrNot ']'
 LoopOrNot -> HeadFor2 VarKons SpaceOrEmpty | HeadFor2 'r' 'a' 'n' 'g' 'e' SpaceOrEmpty '(' SpaceOrEmpty VarKons SpaceOrEmpty ')' SpaceOrEmpty
 
-Operasi -> Operasi SpaceOrEmpty Operator SpaceOrEmpty Operasi | VarKons | PanggilFungsi | ArgsCall
+Operasi -> Operasi SpaceOrEmpty Operator SpaceOrEmpty Operasi | VarKons | PanggilFungsi | ArgsCall | SpaceOrEmpty '(' SpaceOrEmpty Operasi SpaceOrEmpty ')' SpaceOrEmpty
 
-Operator -> '+' | '-' | '*' | '/' | '//'
+Operator -> '+' | '-' | '*' | '/' | '//' | '%'
 
 VarKons -> Var | Kons
 
@@ -67,7 +67,7 @@ HeadFungsi -> 'd' 'e' 'f' Space Var Params ':' SpaceOrEmpty EOL
 
 Kondisi -> SpaceOrEmpty '(' SpaceOrEmpty Boolean SpaceOrEmpty ')' SpaceOrEmpty | SpaceOrEmpty Boolean SpaceOrEmpty
 
-Boolean -> Boolean SpaceOrEmpty OperasiBoolean SpaceOrEmpty Boolean | Operasi
+Boolean -> Boolean SpaceOrEmpty OperasiBoolean SpaceOrEmpty Boolean | Operasi | SpaceOrEmpty '(' SpaceOrEmpty Boolean SpaceOrEmpty ')' SpaceOrEmpty | Boolean SpaceOrEmpty Operator SpaceOrEmpty Boolean
 
 OperasiBoolean -> 'a' 'n' 'd' | 'o' 'r' | '=' '=' | '!' '='
 

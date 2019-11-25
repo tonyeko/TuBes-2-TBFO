@@ -28,7 +28,7 @@ class Grammar:
             rule = Rule(line)
             self.rules[rule.left].append(rule.right)
             for i in self.rules[rule.left][0]:
-                self.rules[rule.left].append(i.split(" "))
+                self.rules[rule.left].append(list(map(lambda x : x[1:-1] if ("'" in x) else x, i.split(" "))))
             self.rules[rule.left] = self.rules[rule.left][1:]
 
 def search_rules(grammar, right):

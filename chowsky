@@ -1,0 +1,776 @@
+S -> Inside S | ArgsAssign a3 | ArgsAssign a4 | ArgsAssign a5 | ArgsAssign a7 | ArgsAssign a2 | ArgsAssign a8 | ArgsAssign a9 | ArgsAssign a10 | CharList0 Alphanum | 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' | '_' | VarKons a14 | Angka Angka | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | a15 a16 | a17 a18 | a17 a23 | a11 a27 | a11 a28 | a11 a26 | a11 a29 | Operasi a31 | Var ParamsCall | VarKons a35 | VarKons a36 | VarKons a34 | VarKons a37 | Operasi a38 | Operasi a30 | Operasi a39 | HeadIf a40 | HeadIf a41 | HeadIf InsideTab | HeadFor2 a42 | HeadFor2 a60 | HeadFor2 VarKons | HeadFor2 a67 | HeadFor2 a74 | HeadFor2 a82 | HeadFor2 a88 | HeadFor2 a95 | HeadFor2 a102 | HeadFor2 a109 | HeadFor2 a114 | HeadFor2 a120 | HeadFor2 a126 | HeadFor2 a132 | HeadFor2 a138 | HeadFor2 a144 | HeadFor2 a150 | HeadFor2 a156 | a157 a167 | a168 a181 | HeadFungsi InsideFungsi | HeadClass InsideClass | ArgsAssign a186 | ArgsAssign a188 | ArgsAssign a189 | ArgsAssign a191 | ArgsAssign a185 | ArgsAssign a192 | ArgsAssign a193 | ArgsAssign a194 | VarKons EOL | Operasi EOL | If EOL | Loop EOL | Import EOL | Fungsi EOL | Class EOL
+a0 -> Operasi SpaceOrEmpty
+a1 -> SpaceOrEmpty a0
+a2 -> SamaDengan a1
+a3 -> SpaceOrEmpty a2
+a4 -> SamaDengan Operasi
+a5 -> SamaDengan a0
+a6 -> SpaceOrEmpty Operasi
+a7 -> SamaDengan a6
+a8 -> SpaceOrEmpty a4
+a9 -> SpaceOrEmpty a5
+a10 -> SpaceOrEmpty a7
+a11 -> '['
+a12 -> ']'
+a13 -> VarKons a12
+a14 -> a11 a13
+a15 -> '"'
+a16 -> CharList1 a15
+a17 -> '''
+a18 -> CharList2 a17
+a19 -> a17 a17
+a20 -> a17 a19
+a21 -> CharList3 a20
+a22 -> a17 a21
+a23 -> a17 a22
+a24 -> LoopOrNot a12
+a25 -> SpaceOrEmpty a24
+a26 -> VarKons a25
+a27 -> SpaceOrEmpty a26
+a28 -> VarKons a24
+a29 -> SpaceOrEmpty a28
+a30 -> Operator a6
+a31 -> SpaceOrEmpty a30
+a32 -> ','
+a33 -> SpaceOrEmpty ArgsCall
+a34 -> a32 a33
+a35 -> SpaceOrEmpty a34
+a36 -> a32 ArgsCall
+a37 -> SpaceOrEmpty a36
+a38 -> Operator Operasi
+a39 -> SpaceOrEmpty a38
+a40 -> InsideTab Elif
+a41 -> InsideTab Else
+a42 -> VarKons SpaceOrEmpty
+a43 -> 'r'
+a44 -> 'a'
+a45 -> 'n'
+a46 -> 'g'
+a47 -> 'e'
+a48 -> '('
+a49 -> ')'
+a50 -> a49 SpaceOrEmpty
+a51 -> SpaceOrEmpty a50
+a52 -> VarKons a51
+a53 -> SpaceOrEmpty a52
+a54 -> a48 a53
+a55 -> SpaceOrEmpty a54
+a56 -> a47 a55
+a57 -> a46 a56
+a58 -> a45 a57
+a59 -> a44 a58
+a60 -> a43 a59
+a61 -> VarKons a49
+a62 -> a48 a61
+a63 -> a47 a62
+a64 -> a46 a63
+a65 -> a45 a64
+a66 -> a44 a65
+a67 -> a43 a66
+a68 -> VarKons a50
+a69 -> a48 a68
+a70 -> a47 a69
+a71 -> a46 a70
+a72 -> a45 a71
+a73 -> a44 a72
+a74 -> a43 a73
+a75 -> SpaceOrEmpty a49
+a76 -> VarKons a75
+a77 -> a48 a76
+a78 -> a47 a77
+a79 -> a46 a78
+a80 -> a45 a79
+a81 -> a44 a80
+a82 -> a43 a81
+a83 -> a48 a52
+a84 -> a47 a83
+a85 -> a46 a84
+a86 -> a45 a85
+a87 -> a44 a86
+a88 -> a43 a87
+a89 -> SpaceOrEmpty a61
+a90 -> a48 a89
+a91 -> a47 a90
+a92 -> a46 a91
+a93 -> a45 a92
+a94 -> a44 a93
+a95 -> a43 a94
+a96 -> SpaceOrEmpty a68
+a97 -> a48 a96
+a98 -> a47 a97
+a99 -> a46 a98
+a100 -> a45 a99
+a101 -> a44 a100
+a102 -> a43 a101
+a103 -> SpaceOrEmpty a76
+a104 -> a48 a103
+a105 -> a47 a104
+a106 -> a46 a105
+a107 -> a45 a106
+a108 -> a44 a107
+a109 -> a43 a108
+a110 -> a47 a54
+a111 -> a46 a110
+a112 -> a45 a111
+a113 -> a44 a112
+a114 -> a43 a113
+a115 -> SpaceOrEmpty a62
+a116 -> a47 a115
+a117 -> a46 a116
+a118 -> a45 a117
+a119 -> a44 a118
+a120 -> a43 a119
+a121 -> SpaceOrEmpty a69
+a122 -> a47 a121
+a123 -> a46 a122
+a124 -> a45 a123
+a125 -> a44 a124
+a126 -> a43 a125
+a127 -> SpaceOrEmpty a77
+a128 -> a47 a127
+a129 -> a46 a128
+a130 -> a45 a129
+a131 -> a44 a130
+a132 -> a43 a131
+a133 -> SpaceOrEmpty a83
+a134 -> a47 a133
+a135 -> a46 a134
+a136 -> a45 a135
+a137 -> a44 a136
+a138 -> a43 a137
+a139 -> SpaceOrEmpty a90
+a140 -> a47 a139
+a141 -> a46 a140
+a142 -> a45 a141
+a143 -> a44 a142
+a144 -> a43 a143
+a145 -> SpaceOrEmpty a97
+a146 -> a47 a145
+a147 -> a46 a146
+a148 -> a45 a147
+a149 -> a44 a148
+a150 -> a43 a149
+a151 -> SpaceOrEmpty a104
+a152 -> a47 a151
+a153 -> a46 a152
+a154 -> a45 a153
+a155 -> a44 a154
+a156 -> a43 a155
+a157 -> 'i'
+a158 -> 'm'
+a159 -> 'p'
+a160 -> 'o'
+a161 -> 't'
+a162 -> Space Var
+a163 -> a161 a162
+a164 -> a43 a163
+a165 -> a160 a164
+a166 -> a159 a165
+a167 -> a158 a166
+a168 -> 'f'
+a169 -> Space VarOrBintang
+a170 -> a161 a169
+a171 -> a43 a170
+a172 -> a160 a171
+a173 -> a159 a172
+a174 -> a158 a173
+a175 -> a157 a174
+a176 -> Space a175
+a177 -> Var a176
+a178 -> Space a177
+a179 -> a158 a178
+a180 -> a160 a179
+a181 -> a43 a180
+a182 -> SpaceOrEmpty EOL
+a183 -> Operasi a182
+a184 -> SpaceOrEmpty a183
+a185 -> SamaDengan a184
+a186 -> SpaceOrEmpty a185
+a187 -> Operasi EOL
+a188 -> SamaDengan a187
+a189 -> SamaDengan a183
+a190 -> SpaceOrEmpty a187
+a191 -> SamaDengan a190
+a192 -> SpaceOrEmpty a188
+a193 -> SpaceOrEmpty a189
+a194 -> SpaceOrEmpty a191
+Inside -> ArgsAssign a186 | ArgsAssign a188 | ArgsAssign a189 | ArgsAssign a191 | ArgsAssign a185 | ArgsAssign a192 | ArgsAssign a193 | ArgsAssign a194 | VarKons EOL | Operasi EOL | If EOL | Loop EOL | Import EOL | Fungsi EOL | Class EOL
+InsideNoEOL -> ArgsAssign a3 | ArgsAssign a4 | ArgsAssign a5 | ArgsAssign a7 | ArgsAssign a2 | ArgsAssign a8 | ArgsAssign a9 | ArgsAssign a10 | CharList0 Alphanum | 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' | '_' | VarKons a14 | Angka Angka | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | a15 a16 | a17 a18 | a17 a23 | a11 a27 | a11 a28 | a11 a26 | a11 a29 | Operasi a31 | Var ParamsCall | VarKons a35 | VarKons a36 | VarKons a34 | VarKons a37 | Operasi a38 | Operasi a30 | Operasi a39 | HeadIf a40 | HeadIf a41 | HeadIf InsideTab | HeadFor2 a42 | HeadFor2 a60 | HeadFor2 VarKons | HeadFor2 a67 | HeadFor2 a74 | HeadFor2 a82 | HeadFor2 a88 | HeadFor2 a95 | HeadFor2 a102 | HeadFor2 a109 | HeadFor2 a114 | HeadFor2 a120 | HeadFor2 a126 | HeadFor2 a132 | HeadFor2 a138 | HeadFor2 a144 | HeadFor2 a150 | HeadFor2 a156 | a157 a167 | a168 a181 | HeadFungsi InsideFungsi | HeadClass InsideClass
+a195 -> Inside InsideTab
+InsideTab -> TAB a195 | TAB Inside | TABS EOL | TAB InsideNoEOL | ';'
+InsideEndTab -> TAB Inside | TABS EOL | TAB InsideNoEOL | ';'
+Alphabets -> 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z'
+Digits -> '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
+a196 -> ''
+a197 -> ''
+Others -> '!' | '#' | '$' | '%' | '&' | '(' | ')' | '*' | '+' | ',' | '-' | '.' | '/' | ':' | ';' | '<' | '=' | '>' | '?' | '@' | '[' | '\' | ']' | '^' | '_' | '`' | '{' | ' | '}' | '~' | a196 a197
+Space -> Space Space | '~'
+SpaceOrEmpty -> Space Space | '~'
+EOL -> ';'
+TAB -> '$'
+TABS -> TAB TABS | '$'
+Angka -> Angka Angka | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
+CharList0 -> 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' | '_'
+a198 -> ''
+a199 -> ''
+CharList1 -> 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '!' | '#' | '$' | '%' | '&' | '(' | ')' | '*' | '+' | ',' | '-' | '.' | '/' | ':' | ';' | '<' | '=' | '>' | '?' | '@' | '[' | '\' | ']' | '^' | '_' | '`' | '{' | ' | '}' | '~' | a198 a199 | '''
+a200 -> ''
+a201 -> ''
+CharList2 -> 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '!' | '#' | '$' | '%' | '&' | '(' | ')' | '*' | '+' | ',' | '-' | '.' | '/' | ':' | ';' | '<' | '=' | '>' | '?' | '@' | '[' | '\' | ']' | '^' | '_' | '`' | '{' | ' | '}' | '~' | a200 a201 | '""
+a202 -> ''
+a203 -> ''
+CharList3 -> 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '!' | '#' | '$' | '%' | '&' | '(' | ')' | '*' | '+' | ',' | '-' | '.' | '/' | ':' | ';' | '<' | '=' | '>' | '?' | '@' | '[' | '\' | ']' | '^' | '_' | '`' | '{' | ' | '}' | '~' | a202 a203 | ''' | '"'
+Var -> CharList0 Alphanum | 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' | '_' | VarKons a14
+Alphanum -> Alphanum Alphanum | 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' | '_' | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
+Kons -> Angka Angka | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | a15 a16 | a17 a18 | a17 a23 | a11 a27 | a11 a28 | a11 a26 | a11 a29
+Array -> a11 a27 | a11 a28 | a11 a26 | a11 a29
+LoopOrNot -> HeadFor2 a42 | HeadFor2 a60 | HeadFor2 VarKons | HeadFor2 a67 | HeadFor2 a74 | HeadFor2 a82 | HeadFor2 a88 | HeadFor2 a95 | HeadFor2 a102 | HeadFor2 a109 | HeadFor2 a114 | HeadFor2 a120 | HeadFor2 a126 | HeadFor2 a132 | HeadFor2 a138 | HeadFor2 a144 | HeadFor2 a150 | HeadFor2 a156
+Operasi -> Operasi a31 | CharList0 Alphanum | 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' | '_' | VarKons a14 | Angka Angka | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | a15 a16 | a17 a18 | a17 a23 | a11 a27 | a11 a28 | a11 a26 | a11 a29 | Var ParamsCall | VarKons a35 | VarKons a36 | VarKons a34 | VarKons a37 | Operasi a38 | Operasi a30 | Operasi a39
+Operator -> '+' | '-' | '*' | '/' | '//'
+VarKons -> CharList0 Alphanum | 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' | '_' | VarKons a14 | Angka Angka | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | a15 a16 | a17 a18 | a17 a23 | a11 a27 | a11 a28 | a11 a26 | a11 a29
+a204 -> '='
+SamaDengan -> '=' | Operator a204
+VarOrBintang -> CharList0 Alphanum | 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' | '_' | VarKons a14 | '*'
+Import -> a157 a167 | a168 a181
+Assign -> ArgsAssign a186 | ArgsAssign a188 | ArgsAssign a189 | ArgsAssign a191 | ArgsAssign a185 | ArgsAssign a192 | ArgsAssign a193 | ArgsAssign a194
+AssignNoEOL -> ArgsAssign a3 | ArgsAssign a4 | ArgsAssign a5 | ArgsAssign a7 | ArgsAssign a2 | ArgsAssign a8 | ArgsAssign a9 | ArgsAssign a10
+Fungsi -> HeadFungsi InsideFungsi
+a205 -> 'u'
+a206 -> Space a183
+a207 -> a45 a206
+a208 -> a43 a207
+a209 -> a205 a208
+a210 -> a161 a209
+a211 -> a47 a210
+a212 -> Space a187
+a213 -> a45 a212
+a214 -> a43 a213
+a215 -> a205 a214
+a216 -> a161 a215
+a217 -> a47 a216
+InsideFungsi -> InsideTab InsideReturn | a43 a211 | a43 a217 | TAB a195 | TAB Inside | TABS EOL | TAB InsideNoEOL | ';'
+InsideReturn -> a43 a211 | a43 a217
+PanggilFungsi -> Var ParamsCall
+ArgsCall -> VarKons a35 | CharList0 Alphanum | 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' | '_' | VarKons a14 | Angka Angka | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | a15 a16 | a17 a18 | a17 a23 | a11 a27 | a11 a28 | a11 a26 | a11 a29 | VarKons a36 | VarKons a34 | VarKons a37
+a218 -> SpaceOrEmpty ArgsAssign
+a219 -> a32 a218
+a220 -> SpaceOrEmpty a219
+a221 -> a32 ArgsAssign
+a222 -> SpaceOrEmpty a221
+ArgsAssign -> Var a220 | CharList0 Alphanum | 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' | '_' | VarKons a14 | Var a221 | Var a219 | Var a222
+a223 -> SpaceOrEmpty ArgsFungsi
+a224 -> a32 a223
+a225 -> HintOrEmpty a224
+a226 -> SpaceOrEmpty a225
+a227 -> a32 ArgsFungsi
+a228 -> HintOrEmpty a227
+a229 -> SpaceOrEmpty a228
+a230 -> SpaceOrEmpty a224
+a231 -> SpaceOrEmpty a227
+ArgsFungsi -> Var a226 | Var HintOrEmpty | Var a228 | Var a225 | Var a229 | Var a230 | CharList0 Alphanum | 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' | '_' | VarKons a14 | Var a227 | Var a224 | Var a231
+a232 -> ':'
+a233 -> SpaceOrEmpty Var
+a234 -> a232 a233
+a235 -> a232 Var
+HintOrEmpty -> SpaceOrEmpty a234 | a232 Var | a232 a233 | SpaceOrEmpty a235
+a236 -> '-'
+a237 -> '>'
+a238 -> Var SpaceOrEmpty
+a239 -> SpaceOrEmpty a238
+a240 -> a237 a239
+a241 -> a237 Var
+a242 -> a237 a238
+a243 -> a237 a233
+Hint2OrEmpty -> a236 a240 | a236 a241 | a236 a242 | a236 a243
+a244 -> SpaceOrEmpty Hint2OrEmpty
+a245 -> a49 a244
+a246 -> SpaceOrEmpty a245
+a247 -> ArgsFungsi a246
+a248 -> SpaceOrEmpty a247
+a249 -> a48 a248
+a250 -> a49 Hint2OrEmpty
+a251 -> ArgsFungsi a250
+a252 -> ArgsFungsi a245
+a253 -> SpaceOrEmpty a250
+a254 -> ArgsFungsi a253
+a255 -> SpaceOrEmpty a251
+a256 -> SpaceOrEmpty a252
+a257 -> SpaceOrEmpty a254
+a258 -> a48 a251
+a259 -> a48 a252
+a260 -> a48 a254
+a261 -> a48 a247
+a262 -> a48 a255
+a263 -> a48 a256
+a264 -> a48 a257
+Params -> SpaceOrEmpty a249 | a48 a251 | a48 a252 | a48 a254 | a48 a247 | a48 a255 | a48 a256 | a48 a257 | a48 a248 | SpaceOrEmpty a258 | SpaceOrEmpty a259 | SpaceOrEmpty a260 | SpaceOrEmpty a261 | SpaceOrEmpty a262 | SpaceOrEmpty a263 | SpaceOrEmpty a264
+a265 -> ArgsCall a51
+a266 -> SpaceOrEmpty a265
+a267 -> a48 a266
+a268 -> ArgsCall a49
+a269 -> ArgsCall a50
+a270 -> ArgsCall a75
+a271 -> SpaceOrEmpty a268
+a272 -> SpaceOrEmpty a269
+a273 -> SpaceOrEmpty a270
+a274 -> a48 a268
+a275 -> a48 a269
+a276 -> a48 a270
+a277 -> a48 a265
+a278 -> a48 a271
+a279 -> a48 a272
+a280 -> a48 a273
+ParamsCall -> SpaceOrEmpty a267 | a48 a268 | a48 a269 | a48 a270 | a48 a265 | a48 a271 | a48 a272 | a48 a273 | a48 a266 | SpaceOrEmpty a274 | SpaceOrEmpty a275 | SpaceOrEmpty a276 | SpaceOrEmpty a277 | SpaceOrEmpty a278 | SpaceOrEmpty a279 | SpaceOrEmpty a280
+a281 -> 'd'
+a282 -> a232 a182
+a283 -> Params a282
+a284 -> Var a283
+a285 -> Space a284
+a286 -> a168 a285
+a287 -> a47 a286
+a288 -> a232 EOL
+a289 -> Params a288
+a290 -> Var a289
+a291 -> Space a290
+a292 -> a168 a291
+a293 -> a47 a292
+HeadFungsi -> a281 a287 | a281 a293
+a294 -> Boolean a51
+a295 -> SpaceOrEmpty a294
+a296 -> a48 a295
+a297 -> Boolean SpaceOrEmpty
+a298 -> Boolean a49
+a299 -> Boolean a50
+a300 -> Boolean a75
+a301 -> SpaceOrEmpty a298
+a302 -> SpaceOrEmpty a299
+a303 -> SpaceOrEmpty a300
+a304 -> a48 a298
+a305 -> a48 a299
+a306 -> a48 a300
+a307 -> a48 a294
+a308 -> a48 a301
+a309 -> a48 a302
+a310 -> a48 a303
+a311 -> SpaceOrEmpty Boolean
+a312 -> OperasiBoolean a311
+a313 -> SpaceOrEmpty a312
+a314 -> OperasiBoolean Boolean
+a315 -> SpaceOrEmpty a314
+Kondisi -> SpaceOrEmpty a296 | SpaceOrEmpty a297 | a48 a298 | a48 a299 | a48 a300 | a48 a294 | a48 a301 | a48 a302 | a48 a303 | a48 a295 | SpaceOrEmpty a304 | SpaceOrEmpty a305 | SpaceOrEmpty a306 | SpaceOrEmpty a307 | SpaceOrEmpty a308 | SpaceOrEmpty a309 | SpaceOrEmpty a310 | Boolean a313 | Operasi a31 | CharList0 Alphanum | 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' | '_' | VarKons a14 | Angka Angka | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | a15 a16 | a17 a18 | a17 a23 | a11 a27 | a11 a28 | a11 a26 | a11 a29 | Var ParamsCall | VarKons a35 | VarKons a36 | VarKons a34 | VarKons a37 | Operasi a38 | Operasi a30 | Operasi a39 | Boolean a314 | Boolean a312 | Boolean a315 | Boolean SpaceOrEmpty | SpaceOrEmpty Boolean
+Boolean -> Boolean a313 | Operasi a31 | CharList0 Alphanum | 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' | '_' | VarKons a14 | Angka Angka | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | a15 a16 | a17 a18 | a17 a23 | a11 a27 | a11 a28 | a11 a26 | a11 a29 | Var ParamsCall | VarKons a35 | VarKons a36 | VarKons a34 | VarKons a37 | Operasi a38 | Operasi a30 | Operasi a39 | Boolean a314 | Boolean a312 | Boolean a315
+a316 -> a45 a281
+a317 -> '!'
+OperasiBoolean -> a44 a316 | a160 a43 | a204 a204 | a317 a204
+If -> HeadIf a40 | HeadIf a41 | HeadIf InsideTab
+a318 -> 'l'
+a319 -> HeadIf a40
+a320 -> a318 a319
+a321 -> HeadIf a41
+a322 -> a318 a321
+a323 -> HeadIf InsideTab
+a324 -> a318 a323
+Elif -> a47 a320 | a47 a322 | a47 a324
+Else -> HeadElse InsideTab
+a325 -> Kondisi a282
+a326 -> a168 a325
+a327 -> Kondisi a288
+a328 -> a168 a327
+HeadIf -> a157 a326 | a157 a328
+a329 -> 's'
+a330 -> SpaceOrEmpty a282
+a331 -> a47 a330
+a332 -> a329 a331
+a333 -> a318 a332
+a334 -> a47 a288
+a335 -> a329 a334
+a336 -> a318 a335
+a337 -> a47 a282
+a338 -> a329 a337
+a339 -> a318 a338
+a340 -> SpaceOrEmpty a288
+a341 -> a47 a340
+a342 -> a329 a341
+a343 -> a318 a342
+HeadElse -> a47 a333 | a47 a336 | a47 a339 | a47 a343
+Loop -> HeadFor InsideTab | HeadWhile InsideTab
+a344 -> 'w'
+a345 -> 'h'
+a346 -> a47 a325
+a347 -> a318 a346
+a348 -> a157 a347
+a349 -> a345 a348
+a350 -> a47 a327
+a351 -> a318 a350
+a352 -> a157 a351
+a353 -> a345 a352
+HeadWhile -> a344 a349 | a344 a353
+a354 -> VarKons a330
+a355 -> a49 a330
+a356 -> SpaceOrEmpty a355
+a357 -> VarKons a356
+a358 -> SpaceOrEmpty a357
+a359 -> a48 a358
+a360 -> SpaceOrEmpty a359
+a361 -> a47 a360
+a362 -> a46 a361
+a363 -> a45 a362
+a364 -> a44 a363
+a365 -> a43 a364
+a366 -> VarKons a288
+a367 -> VarKons a282
+a368 -> VarKons a340
+a369 -> a49 a288
+a370 -> VarKons a369
+a371 -> a48 a370
+a372 -> a47 a371
+a373 -> a46 a372
+a374 -> a45 a373
+a375 -> a44 a374
+a376 -> a43 a375
+a377 -> a49 a282
+a378 -> VarKons a377
+a379 -> a48 a378
+a380 -> a47 a379
+a381 -> a46 a380
+a382 -> a45 a381
+a383 -> a44 a382
+a384 -> a43 a383
+a385 -> a49 a340
+a386 -> VarKons a385
+a387 -> a48 a386
+a388 -> a47 a387
+a389 -> a46 a388
+a390 -> a45 a389
+a391 -> a44 a390
+a392 -> a43 a391
+a393 -> VarKons a355
+a394 -> a48 a393
+a395 -> a47 a394
+a396 -> a46 a395
+a397 -> a45 a396
+a398 -> a44 a397
+a399 -> a43 a398
+a400 -> SpaceOrEmpty a369
+a401 -> VarKons a400
+a402 -> a48 a401
+a403 -> a47 a402
+a404 -> a46 a403
+a405 -> a45 a404
+a406 -> a44 a405
+a407 -> a43 a406
+a408 -> SpaceOrEmpty a377
+a409 -> VarKons a408
+a410 -> a48 a409
+a411 -> a47 a410
+a412 -> a46 a411
+a413 -> a45 a412
+a414 -> a44 a413
+a415 -> a43 a414
+a416 -> SpaceOrEmpty a385
+a417 -> VarKons a416
+a418 -> a48 a417
+a419 -> a47 a418
+a420 -> a46 a419
+a421 -> a45 a420
+a422 -> a44 a421
+a423 -> a43 a422
+a424 -> a48 a357
+a425 -> a47 a424
+a426 -> a46 a425
+a427 -> a45 a426
+a428 -> a44 a427
+a429 -> a43 a428
+a430 -> SpaceOrEmpty a370
+a431 -> a48 a430
+a432 -> a47 a431
+a433 -> a46 a432
+a434 -> a45 a433
+a435 -> a44 a434
+a436 -> a43 a435
+a437 -> SpaceOrEmpty a378
+a438 -> a48 a437
+a439 -> a47 a438
+a440 -> a46 a439
+a441 -> a45 a440
+a442 -> a44 a441
+a443 -> a43 a442
+a444 -> SpaceOrEmpty a386
+a445 -> a48 a444
+a446 -> a47 a445
+a447 -> a46 a446
+a448 -> a45 a447
+a449 -> a44 a448
+a450 -> a43 a449
+a451 -> SpaceOrEmpty a393
+a452 -> a48 a451
+a453 -> a47 a452
+a454 -> a46 a453
+a455 -> a45 a454
+a456 -> a44 a455
+a457 -> a43 a456
+a458 -> SpaceOrEmpty a401
+a459 -> a48 a458
+a460 -> a47 a459
+a461 -> a46 a460
+a462 -> a45 a461
+a463 -> a44 a462
+a464 -> a43 a463
+a465 -> SpaceOrEmpty a409
+a466 -> a48 a465
+a467 -> a47 a466
+a468 -> a46 a467
+a469 -> a45 a468
+a470 -> a44 a469
+a471 -> a43 a470
+a472 -> SpaceOrEmpty a417
+a473 -> a48 a472
+a474 -> a47 a473
+a475 -> a46 a474
+a476 -> a45 a475
+a477 -> a44 a476
+a478 -> a43 a477
+a479 -> a47 a359
+a480 -> a46 a479
+a481 -> a45 a480
+a482 -> a44 a481
+a483 -> a43 a482
+a484 -> SpaceOrEmpty a371
+a485 -> a47 a484
+a486 -> a46 a485
+a487 -> a45 a486
+a488 -> a44 a487
+a489 -> a43 a488
+a490 -> SpaceOrEmpty a379
+a491 -> a47 a490
+a492 -> a46 a491
+a493 -> a45 a492
+a494 -> a44 a493
+a495 -> a43 a494
+a496 -> SpaceOrEmpty a387
+a497 -> a47 a496
+a498 -> a46 a497
+a499 -> a45 a498
+a500 -> a44 a499
+a501 -> a43 a500
+a502 -> SpaceOrEmpty a394
+a503 -> a47 a502
+a504 -> a46 a503
+a505 -> a45 a504
+a506 -> a44 a505
+a507 -> a43 a506
+a508 -> SpaceOrEmpty a402
+a509 -> a47 a508
+a510 -> a46 a509
+a511 -> a45 a510
+a512 -> a44 a511
+a513 -> a43 a512
+a514 -> SpaceOrEmpty a410
+a515 -> a47 a514
+a516 -> a46 a515
+a517 -> a45 a516
+a518 -> a44 a517
+a519 -> a43 a518
+a520 -> SpaceOrEmpty a418
+a521 -> a47 a520
+a522 -> a46 a521
+a523 -> a45 a522
+a524 -> a44 a523
+a525 -> a43 a524
+a526 -> SpaceOrEmpty a424
+a527 -> a47 a526
+a528 -> a46 a527
+a529 -> a45 a528
+a530 -> a44 a529
+a531 -> a43 a530
+a532 -> SpaceOrEmpty a431
+a533 -> a47 a532
+a534 -> a46 a533
+a535 -> a45 a534
+a536 -> a44 a535
+a537 -> a43 a536
+a538 -> SpaceOrEmpty a438
+a539 -> a47 a538
+a540 -> a46 a539
+a541 -> a45 a540
+a542 -> a44 a541
+a543 -> a43 a542
+a544 -> SpaceOrEmpty a445
+a545 -> a47 a544
+a546 -> a46 a545
+a547 -> a45 a546
+a548 -> a44 a547
+a549 -> a43 a548
+a550 -> SpaceOrEmpty a452
+a551 -> a47 a550
+a552 -> a46 a551
+a553 -> a45 a552
+a554 -> a44 a553
+a555 -> a43 a554
+a556 -> SpaceOrEmpty a459
+a557 -> a47 a556
+a558 -> a46 a557
+a559 -> a45 a558
+a560 -> a44 a559
+a561 -> a43 a560
+a562 -> SpaceOrEmpty a466
+a563 -> a47 a562
+a564 -> a46 a563
+a565 -> a45 a564
+a566 -> a44 a565
+a567 -> a43 a566
+a568 -> SpaceOrEmpty a473
+a569 -> a47 a568
+a570 -> a46 a569
+a571 -> a45 a570
+a572 -> a44 a571
+a573 -> a43 a572
+HeadFor -> HeadFor2 a354 | HeadFor2 a365 | HeadFor2 a366 | HeadFor2 a367 | HeadFor2 a368 | HeadFor2 a376 | HeadFor2 a384 | HeadFor2 a392 | HeadFor2 a399 | HeadFor2 a407 | HeadFor2 a415 | HeadFor2 a423 | HeadFor2 a429 | HeadFor2 a436 | HeadFor2 a443 | HeadFor2 a450 | HeadFor2 a457 | HeadFor2 a464 | HeadFor2 a471 | HeadFor2 a478 | HeadFor2 a483 | HeadFor2 a489 | HeadFor2 a495 | HeadFor2 a501 | HeadFor2 a507 | HeadFor2 a513 | HeadFor2 a519 | HeadFor2 a525 | HeadFor2 a531 | HeadFor2 a537 | HeadFor2 a543 | HeadFor2 a549 | HeadFor2 a555 | HeadFor2 a561 | HeadFor2 a567 | HeadFor2 a573
+a574 -> a45 Space
+a575 -> a157 a574
+a576 -> Space a575
+a577 -> Var a576
+a578 -> Space a577
+a579 -> a43 a578
+a580 -> a160 a579
+HeadFor2 -> a168 a580
+Class -> HeadClass InsideClass
+InsideClass -> TAB Fungsi
+a581 -> 'c'
+a582 -> a48 a356
+a583 -> SpaceOrEmpty a582
+a584 -> Var a583
+a585 -> Space a584
+a586 -> a329 a585
+a587 -> a329 a586
+a588 -> a44 a587
+a589 -> a318 a588
+a590 -> Var a330
+a591 -> Space a590
+a592 -> a329 a591
+a593 -> a329 a592
+a594 -> a44 a593
+a595 -> a318 a594
+a596 -> a48 a369
+a597 -> Var a596
+a598 -> Space a597
+a599 -> a329 a598
+a600 -> a329 a599
+a601 -> a44 a600
+a602 -> a318 a601
+a603 -> a48 a377
+a604 -> Var a603
+a605 -> Space a604
+a606 -> a329 a605
+a607 -> a329 a606
+a608 -> a44 a607
+a609 -> a318 a608
+a610 -> a48 a385
+a611 -> Var a610
+a612 -> Space a611
+a613 -> a329 a612
+a614 -> a329 a613
+a615 -> a44 a614
+a616 -> a318 a615
+a617 -> a48 a355
+a618 -> Var a617
+a619 -> Space a618
+a620 -> a329 a619
+a621 -> a329 a620
+a622 -> a44 a621
+a623 -> a318 a622
+a624 -> a48 a400
+a625 -> Var a624
+a626 -> Space a625
+a627 -> a329 a626
+a628 -> a329 a627
+a629 -> a44 a628
+a630 -> a318 a629
+a631 -> a48 a408
+a632 -> Var a631
+a633 -> Space a632
+a634 -> a329 a633
+a635 -> a329 a634
+a636 -> a44 a635
+a637 -> a318 a636
+a638 -> a48 a416
+a639 -> Var a638
+a640 -> Space a639
+a641 -> a329 a640
+a642 -> a329 a641
+a643 -> a44 a642
+a644 -> a318 a643
+a645 -> Var a582
+a646 -> Space a645
+a647 -> a329 a646
+a648 -> a329 a647
+a649 -> a44 a648
+a650 -> a318 a649
+a651 -> SpaceOrEmpty a596
+a652 -> Var a651
+a653 -> Space a652
+a654 -> a329 a653
+a655 -> a329 a654
+a656 -> a44 a655
+a657 -> a318 a656
+a658 -> SpaceOrEmpty a603
+a659 -> Var a658
+a660 -> Space a659
+a661 -> a329 a660
+a662 -> a329 a661
+a663 -> a44 a662
+a664 -> a318 a663
+a665 -> SpaceOrEmpty a610
+a666 -> Var a665
+a667 -> Space a666
+a668 -> a329 a667
+a669 -> a329 a668
+a670 -> a44 a669
+a671 -> a318 a670
+a672 -> SpaceOrEmpty a617
+a673 -> Var a672
+a674 -> Space a673
+a675 -> a329 a674
+a676 -> a329 a675
+a677 -> a44 a676
+a678 -> a318 a677
+a679 -> SpaceOrEmpty a624
+a680 -> Var a679
+a681 -> Space a680
+a682 -> a329 a681
+a683 -> a329 a682
+a684 -> a44 a683
+a685 -> a318 a684
+a686 -> SpaceOrEmpty a631
+a687 -> Var a686
+a688 -> Space a687
+a689 -> a329 a688
+a690 -> a329 a689
+a691 -> a44 a690
+a692 -> a318 a691
+a693 -> SpaceOrEmpty a638
+a694 -> Var a693
+a695 -> Space a694
+a696 -> a329 a695
+a697 -> a329 a696
+a698 -> a44 a697
+a699 -> a318 a698
+a700 -> Var a288
+a701 -> Space a700
+a702 -> a329 a701
+a703 -> a329 a702
+a704 -> a44 a703
+a705 -> a318 a704
+a706 -> Var a282
+a707 -> Space a706
+a708 -> a329 a707
+a709 -> a329 a708
+a710 -> a44 a709
+a711 -> a318 a710
+a712 -> Var a340
+a713 -> Space a712
+a714 -> a329 a713
+a715 -> a329 a714
+a716 -> a44 a715
+a717 -> a318 a716
+HeadClass -> a581 a589 | a581 a595 | a581 a602 | a581 a609 | a581 a616 | a581 a623 | a581 a630 | a581 a637 | a581 a644 | a581 a650 | a581 a657 | a581 a664 | a581 a671 | a581 a678 | a581 a685 | a581 a692 | a581 a699 | a581 a705 | a581 a711 | a581 a717
