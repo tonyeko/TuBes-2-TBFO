@@ -52,7 +52,7 @@ def parse(sentence, grammar):
     print(sentence)
     #print("=========================")
     words = [i for i in sentence]
-    # parts = re.split('\s|(?<!\d)[,.](?!\d)', sentence)
+    parts = re.split('\s|(?<!\d)[,.](?!\d)', sentence)
     word = sentence.split()     # Hilangin spasi
     word2 = re.split('[-+*/]', ''.join(word)) # hilangin simbol operator
     # word = sentence.split()
@@ -64,6 +64,7 @@ def parse(sentence, grammar):
     print(words)
     # words = [i for i in sentence]
     for i in range(len(words)):
+        print(words[i])
         #print(words[i], end=" ")
         if words[i] == ' ':
             words[i] = '~'          # Kalau dimasukkin ke line.replace ngeprintnya jadi jelek
@@ -78,10 +79,13 @@ def parse(sentence, grammar):
         #     elif words[i]+words[i+1] == '\n':
         #         words[i:i+2] = ';'
 
-    table = [ [ [] for i in range(len(sentence)) ] for j in range(len(sentence)) ] 
+    # table = [ [ [] for i in range(len(sentence)) ] for j in range(len(sentence)) ] 
     
+    table = [ [ [] for i in range(len(words)) ] for j in range(len(words)) ] 
+
     # Algoritma 1
     for column in range(len(words)):
+        # print(words[column])
         table[column][column] = search_rules(grammar, [words[column]])
         #print(table[column][column])
         for row in reversed(range(column + 1)):
@@ -115,12 +119,12 @@ error = 0
 for i in range(len(sentences)):
     parse_table = parse(sentences[i], grammar)
     # Print Tabel
-    '''
+
     for row in range(len(parse_table)):
         for col in range(len(parse_table)):
             print(parse_table[row][col], end="")
         print()
-    '''
+
     print(realtext[i],end="    ")
     if not([] == list(filter(None,map(lambda x: x if ('Head' in x) else None, parse_table[0][-1])))):
         state.pop(0)

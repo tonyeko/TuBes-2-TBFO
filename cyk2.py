@@ -1,5 +1,6 @@
 from collections import defaultdict
 import itertools
+import re
 
 GRAMMAR_RULES = "./grammar/chowsky"
 SENTENCES = "input.txt"
@@ -73,7 +74,25 @@ def parse(sentence, grammar):
     #print(sentence)
     #print("=========================")
     
+    # words = [i for i in sentence]
+
+    print("=========================")
+    print(sentence)
+    print("=========================")
     words = [i for i in sentence]
+    parts = re.split('\s|(?<!\d)[,.](?!\d)', sentence)
+    word = sentence.split()     # Hilangin spasi
+    word2 = re.split('[-+*/]', ''.join(word)) # hilangin simbol operator
+    # word = sentence.split()
+    for i in range(len(word)):
+        for j in range(len(word2)):
+            print(word[i], end=" ============= "); print(word2[j])
+            if word[i] == word2[j]:
+                word[i] = 'x'
+    # print(words)
+    words = ''.join(word)
+    print(words)
+
     for i in range(len(words)):
         #print(words[i], end=" ")
         if words[i] == ' ':
@@ -87,7 +106,8 @@ def parse(sentence, grammar):
         #     elif words[i]+words[i+1] == '\n':
         #         words[i:i+2] = ';'
 
-    table = [ [ [] for i in range(len(sentence)) ] for j in range(len(sentence)) ] 
+    # table = [ [ [] for i in range(len(sentence)) ] for j in range(len(sentence)) ] 
+    table = [ [ [] for i in range(len(words)) ] for j in range(len(words)) ] 
     
     # Algoritma 1
     for column in range(len(words)):
