@@ -47,16 +47,16 @@ def search_rules(grammar, right):
     return matches
 
 def parse(sentence, grammar):
-    print("=========================")
-    print(sentence)
-    print("=========================")
+    #print("=========================")
+    #print(sentence)
+    #print("=========================")
     
     words = [i for i in sentence]
     for i in range(len(words)):
-        print(words[i], end=" ")
+        #print(words[i], end=" ")
         if words[i] == ' ':
             words[i] = '~'          # Kalau dimasukkin ke line.replace ngeprintnya jadi jelek
-        print(words[i])
+        #print(words[i])
         # if i < len(words)-1:
         #     if words[i]+words[i+1] == '\t':
         #         words[i:i+2] = '$'
@@ -78,8 +78,13 @@ def parse(sentence, grammar):
                         table[row][column].extend(search_rules(grammar, non_term))
 
     for i in table[0][len(table)-1]:
-        if i == 'S':
-            print("Accepted")
+        if state[0] in i:
+            state.pop(0)
+            state.append('Accepted2')
+            break
+        elif i == 'S':
+            state.pop(0)
+            state.append('Accepted')
             break
 
     return table
@@ -87,17 +92,37 @@ def parse(sentence, grammar):
 
 grammar = read_grammar(GRAMMAR_RULES)
 sentences = read_python_file(SENTENCES)
-
+realtext = list(map(lambda x: x.replace('\n',''), open(SENTENCES, "r").readlines()))
 grammar = Grammar(grammar)
 # print(grammar)
 print(sentences)
-
-for sentence in sentences:
-    
-    parse_table = parse(sentence, grammar)
-    print()
+state = ['XXX']
+error = 0
+for i in range(len(sentences)):
+    parse_table = parse(sentences[i], grammar)
     # Print Tabel
+    '''
     for row in range(len(parse_table)):
         for col in range(len(parse_table)):
             print(parse_table[row][col], end="")
         print()
+    '''
+    print(realtext[i],end="    ")
+    if not([] == list(filter(None,map(lambda x: x if ('Head' in x) else None, parse_table[0][-1])))):
+        state.pop(0)
+        state.append('InsideTab')
+        print()
+    elif state[0] == 'Accepted':
+        state.pop(0)
+        state.append('XXX')
+        print()
+    elif state[0] == 'Accepted2':
+        state.pop(0)
+        state.append('InsideTab')
+        print()
+    else:
+        print('Syntax error in Line {}'.format(i+1))
+        error += 1
+
+if (error == 0):
+    print('Compile success!')

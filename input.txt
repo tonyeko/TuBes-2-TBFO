@@ -1,2 +1,8 @@
 if (a == a):
 	x
+	a
+b
+	x
+
+a = '124sdkad'
+#halo

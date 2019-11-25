@@ -1,7 +1,6 @@
 S -> Inside S | InsideNoEOL | Inside
 
-Inside -> Assign | VarKons EOL | Boolean EOL | If EOL | Loop EOL | Import EOL | Fungsi EOL | Class EOL
-InsideNoEOL -> AssignNoEOL | VarKons | Boolean | If | Loop | Import | Fungsi | Class
+Inside -> Assign | VarKons EOL | Boolean EOL | If EOL | Loop EOL | Import EOL | Fungsi EOL | Class EOL | EOL
 InsideTab -> TAB Inside InsideTab | InsideEndTab
 InsideEndTab -> TAB Inside | TABS EOL | TAB InsideNoEOL
 
@@ -9,7 +8,7 @@ Alphabets -> 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | '
 
 Digits -> '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
 
-Others -> '!' | '#' | '$' | '%' | '&' | '(' | ')' | '*' | '+' | ',' | '-' | '.' | '/' | ':' | ';' | '<' | '=' | '>' | '?' | '@' | '[' | '\' | ']' | '^' | '_' | '`' | '{' | '|' | '}' | '~' | ' '
+Others -> '!' | '#' | '$' | '%' | '&' | '(' | ')' | '*' | '+' | ',' | '-' | '.' | '/' | ':' | ';' | '<' | '=' | '>' | '?' | '@' | '[' | '\' | ']' | '^' | '_' | '`' | '{' | '|' | '}' | '~'
 
 Space -> Space Space | '~'
 SpaceOrEmpty -> Space | EEE
@@ -21,13 +20,13 @@ Angka -> Angka Angka | Digits
 
 CharList0 -> Alphabets | '_'
 CharList1 -> Alphabets | Digits | Others | '''
-CharList2 -> Alphabets | Digits | Others | '""
+CharList2 -> Alphabets | Digits | Others | '"'
 CharList3 -> Alphabets | Digits | Others | ''' | '"'
 
 Var -> CharList0 Alphanum | CharList0 | VarKons '[' VarKons ']'
 Alphanum -> Alphanum Alphanum | CharList0 | Digits
 
-Kons -> Angka | '"' CharList1 '"' | ''' CharList2 ''' | ''' ''' ''' CharList3 ''' ''' ''' | Array
+Kons -> Angka | '"' Alphanum '"' | ''' Alphanum ''' | ''' ''' ''' Alphanum ''' ''' ''' | Array
 
 Array -> '[' SpaceOrEmpty VarKons SpaceOrEmpty LoopOrNot ']'
 LoopOrNot -> HeadFor2 VarKons SpaceOrEmpty | HeadFor2 'r' 'a' 'n' 'g' 'e' SpaceOrEmpty '(' SpaceOrEmpty VarKons SpaceOrEmpty ')' SpaceOrEmpty
