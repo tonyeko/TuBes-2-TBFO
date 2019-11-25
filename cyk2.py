@@ -70,23 +70,23 @@ def recur_search(prods, grammar):
         
 
 def parse(sentence, grammar):
-    #print("=========================")
-    #print(sentence)
-    #print("=========================")
-    
-    # words = [i for i in sentence]
-
-    print("=========================")
+    # print("=========================")
     print(sentence)
-    print("=========================")
-    words = [i for i in sentence]
-    parts = re.split('\s|(?<!\d)[,.](?!\d)', sentence)
-    word = sentence.split()     # Hilangin spasi
-    word2 = re.split('[-+*/]', ''.join(word)) # hilangin simbol operator
-    # word = sentence.split()
+    # print("=========================")
+    # words = [i for i in sentence]
+    # word = sentence.split()                                 # Hilangin spasi
+
+    word = sentence.split("'")
+    if (len(word)%2 == 0):
+        word = ['^','%']
+    else:
+        word = list(map(lambda x: 'a' if (word.index(x)%2) else x, word))
+        word = "'".join(word).split()
+
+    # INI UNTUK KASUS OPERATOR
+    word2 = re.split('[-+*/]', ''.join(word))               # hilangin simbol operator
     for i in range(len(word)):
         for j in range(len(word2)):
-            print(word[i], end=" ============= "); print(word2[j])
             if word[i] == word2[j]:
                 word[i] = 'x'
     # print(words)
