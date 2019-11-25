@@ -3,11 +3,18 @@ from collections import defaultdict
 GRAMMAR_RULES = "./grammar/chowsky"
 SENTENCES = "input.txt"
 
-def read_lines(filename):
+def read_grammar(filename):
     all_lines = list()
     with open(filename, "r") as file:
         for line in file.readlines():
             all_lines.append(line.replace("\n", ""))
+    return all_lines
+
+def read_python_file(filename):
+    all_lines = list()
+    with open(filename, "r") as file:
+        for line in file.readlines():
+            all_lines.append(line.replace("\n", ";").replace("\t", "$"))
     return all_lines
 
 class Rule:
@@ -17,7 +24,6 @@ class Rule:
 
 class Grammar:
     def __init__(self, lines):
-        '''Constructor for grammar class. Initializes grammar rules.'''
         super(Grammar, self).__init__()
         self.lines = lines
         self.rules = defaultdict(lambda: [])
@@ -47,21 +53,19 @@ def parse(sentence, grammar):
     
     words = [i for i in sentence]
     for i in range(len(words)):
+        print(words[i], end=" ")
         if words[i] == ' ':
-            words[i] = '~'
-        elif words[i] == '\t':
-            words[i] = '$'
-        elif words[i] == '\r':
-            words[i] = ';'
-        elif words[i] == '\n':
-            words[i] = ''
+            words[i] = '~'          # Kalau dimasukkin ke line.replace ngeprintnya jadi jelek
+        print(words[i])
+        # if i < len(words)-1:
+        #     if words[i]+words[i+1] == '\t':
+        #         words[i:i+2] = '$'
+        #     elif words[i]+words[i+1] == '\r':
+        #         words[i:i+2] = ';'
+        #     elif words[i]+words[i+1] == '\n':
+        #         words[i:i+2] = ';'
 
-    table = []  # Inits empty table.
-
-    for x in range(len(sentence)):
-        table.append([])
-        for y in range(len(sentence)):
-            table[x].append([])
+    table = [ [ [] for i in range(len(sentence)) ] for j in range(len(sentence)) ] 
     
     # Algoritma 1
     for column in range(len(words)):
@@ -81,13 +85,15 @@ def parse(sentence, grammar):
     return table
 
 
-grammar = read_lines(GRAMMAR_RULES)
-sentences = read_lines(SENTENCES)
+grammar = read_grammar(GRAMMAR_RULES)
+sentences = read_python_file(SENTENCES)
 
 grammar = Grammar(grammar)
 # print(grammar)
+print(sentences)
 
 for sentence in sentences:
+    
     parse_table = parse(sentence, grammar)
     print()
     # Print Tabel
