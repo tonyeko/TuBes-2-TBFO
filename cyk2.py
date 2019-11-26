@@ -1,9 +1,10 @@
 from collections import defaultdict
 import itertools
 import re
+import time
 
 GRAMMAR_RULES = "./grammar/chowsky"
-SENTENCES = "input.txt"
+SENTENCES = input("Masukkan nama file yang ingin diuji: ")
 
 blacklisted = {
     'else': '',
@@ -128,17 +129,17 @@ def parse(sentence, grammar):
     words = ''.join(word)
     if whitespace > 0: words = ' ' + words
     '''
-
-    words = list(sentence.rstrip())
+    word = " ".join(splitquote(sentence.rstrip(), "'"))
+    word = " ".join(splitquote(word, '"'))
+    words = list(word)
 
     for i in range(len(words)):
-        #print(words[i], end=" ")
         if words[i] == ' ':
             words[i] = '~'          # Kalau dimasukkin ke line.replace ngeprintnya jadi jelek
 
     # Algoritma 1
-    if (len(words) >= 2 and words[0] == ' '):
-        while (words[1] == ' '):
+    if (len(words) >= 2 and words[0] == '~'):
+        while (words[1] == '~'):
             words.pop(1)
     if  ('#' in "".join(words)):
         i = words.index('#')
@@ -149,8 +150,8 @@ def parse(sentence, grammar):
     if (len(words) > 0):
         column = 0
         while(column < len(words)):
-            if (words[column] == ' '):
-                while (column < len(words)-1 and words[column+1] == ' '):
+            if (words[column] == '~'):
+                while (column < len(words)-1 and words[column+1] == '~'):
                     words.pop(column+1)
             temp = search_rules(grammar, [words[column]])
             if ('Var' in temp):
@@ -213,150 +214,150 @@ def parse(sentence, grammar):
             break
     return table
 
-import time
-x = time.time()
-
-grammar = read_grammar(GRAMMAR_RULES)
-sentences = read_python_file(SENTENCES)
-realtext = list(map(lambda x: x.replace('\n',''), open(SENTENCES, "r").readlines()))
-grammar = Grammar(grammar)
-state = ['XXX']
-co = []
-ooo = [-1]
-errorLines = []
-#print(sentences)
-for i in range(len(sentences)):
-    parse_table = parse(sentences[i], grammar)
-    a = 0
-    print(realtext[i], end="    ")
-    #print(state,co)
-    #print(ooo[0], parse_table[0][-1])
-    for j in parse_table[0][-1]:
-        if (sentences[i].replace('$','').replace(';','').replace(' ','') != "" and not('HeadIf' in j or 'HeadElif' in j or 'HeadFor' in j or 'HeadWhile' in j or 'HeadFungsi' in j or 'HeadClass' in j or 'HeadWith' in j or 'HeadElse' in j) and len(co) > sentences[i].count('$') and not(ooo[0])):
-            if (state[-1] == 'Accepted'):
+try:
+    print("Starting the compiling process...")
+    starttime = time.time()
+    grammar = read_grammar(GRAMMAR_RULES)
+    sentences = read_python_file(SENTENCES)
+    realtext = list(map(lambda x: x.replace('\n',''), open(SENTENCES, "r").readlines()))
+    grammar = Grammar(grammar)
+    state = ['XXX']
+    co = []
+    ooo = [-1]
+    errorLines = []
+    #print(sentences)
+    for i in range(len(sentences)):
+        parse_table = parse(sentences[i], grammar)
+        a = 0
+        #print(realtext[i], end="    ")
+        #print(state,co)
+        #print(ooo[0], parse_table[0][-1])
+        for j in parse_table[0][-1]:
+            if (sentences[i].replace('$','').replace(';','').replace(' ','') != "" and not('HeadIf' in j or 'HeadElif' in j or 'HeadFor' in j or 'HeadWhile' in j or 'HeadFungsi' in j or 'HeadClass' in j or 'HeadWith' in j or 'HeadElse' in j) and len(co) > sentences[i].count('$') and not(ooo[0])):
+                if (state[-1] == 'Accepted'):
+                    state.pop(-1)
+                    state.append('InsideTab')
+                break
+            elif (sentences[i].replace('$','').replace(';','').replace(' ','') == ""):
+                a += 1
+                break
+            elif (len(co) >= sentences[i].count('$') and 'HeadIf' in j):
+                [co.pop(-1) for i in range(len(co)-sentences[i].count('$'))]
+                if (len(co) == 0):
+                    state.pop(-1)
+                state.append('InsideTab')
+                co.append('IF')
+                ooo[0] = 0
+                a += 1
+                break
+            elif (len(co) >= sentences[i].count('$') and 'HeadFor' in j):
+                [co.pop(-1) for i in range(len(co)-sentences[i].count('$'))]
+                if (len(co) == 0):
+                    state.pop(-1)
+                state.append('InsideTab')
+                co.append('For')
+                ooo[0] = 0
+                a += 1
+                break
+            elif (len(co) >= sentences[i].count('$') and 'HeadWhile' in j):
+                [co.pop(-1) for i in range(len(co)-sentences[i].count('$'))]
+                if (len(co) == 0):
+                    state.pop(-1)
+                state.append('InsideTab')
+                co.append('While')
+                ooo[0] = 0
+                a += 1
+                break
+            elif (len(co) >= sentences[i].count('$') and 'HeadFungsi' in j):
+                [co.pop(-1) for i in range(len(co)-sentences[i].count('$'))]
+                if (len(co) == 0):
+                    state.pop(-1)
+                state.append('InsideTab')
+                co.append('Fungsi')
+                ooo[0] = 0
+                a += 1
+                break
+            elif (len(co) >= sentences[i].count('$') and 'HeadClass' in j):
+                [co.pop(-1) for i in range(len(co)-sentences[i].count('$'))]
+                if (len(co) == 0):
+                    state.pop(-1)
+                state.append('InsideClass')
+                co.append('Class')
+                ooo[0] = 0
+                a += 1
+                break
+            elif (len(co) >= sentences[i].count('$') and 'HeadWith' in j):
+                [co.pop(-1) for i in range(len(co)-sentences[i].count('$'))]
+                if (len(co) == 0):
+                    state.pop(-1)
+                state.append('InsideTab')
+                co.append('With')
+                ooo[0] = 0
+                a += 1
+                break
+            elif (len(co) and 'Fungsi' in co and 'InsideReturn' in j):
+                #state.pop(-1)
+                #state.append('XXX')
+                #co.pop(-1)
+                ooo[0] += 1
+                a += 1
+            elif (len(co) and 'HeadElif' in j and 'IF' == co[-1] and sentences[i].count('$') == len(co)-1):
+                a += 1
+                break
+            elif (len(co) and 'HeadElif' in j and sentences[i].count('$') < len(co)-1 and 'IF' == co[sentences[i].count('$')]):
+                [state.pop(-1) for i in range(len(co)-sentences[i].count('$'))]
+                [co.pop(-1) for i in range(len(co)-sentences[i].count('$')-1)]
+                a += 1
+                break
+            elif (len(co) and 'HeadElse' in j and 'IF' == co[-1] and sentences[i].count('$') == len(co)-1):
+                co.pop(-1)
+                co.append('ELSE')
+                a += 1
+                break
+            elif (len(co) and 'HeadElse' in j and sentences[i].count('$') < len(co)-1 and 'IF' == co[sentences[i].count('$')]):
+                [state.pop(-1) for i in range(len(co)-sentences[i].count('$')-1)]
+                [co.pop(-1) for i in range(len(co)-sentences[i].count('$'))]
+                co.append('ELSE')
+                a += 1
+                break
+            elif (state[-1] == 'Accepted'):
+                [state.pop(-1) for i in range(len(co)-sentences[i].count('$'))]
+                if (len(state)):
+                    state.pop(-1)
+                state.append('XXX')
+                if (co != []):
+                    [co.pop(-1) for i in range(len(co)-sentences[i].count('$'))]
+                a += 1
+                break
+            elif (state[-1] == 'Accepted2' and sentences[i].count('$') <= len(co)):
                 state.pop(-1)
                 state.append('InsideTab')
-            break
-        elif (sentences[i].replace('$','').replace(';','').replace(' ','') == ""):
-            a += 1
-            break
-        elif (len(co) >= sentences[i].count('$') and 'HeadIf' in j):
-            [co.pop(-1) for i in range(len(co)-sentences[i].count('$'))]
-            if (len(co) == 0):
-                state.pop(-1)
-            state.append('InsideTab')
-            co.append('IF')
-            ooo[0] = 0
-            a += 1
-            break
-        elif (len(co) >= sentences[i].count('$') and 'HeadFor' in j):
-            [co.pop(-1) for i in range(len(co)-sentences[i].count('$'))]
-            if (len(co) == 0):
-                state.pop(-1)
-            state.append('InsideTab')
-            co.append('For')
-            ooo[0] = 0
-            a += 1
-            break
-        elif (len(co) >= sentences[i].count('$') and 'HeadWhile' in j):
-            [co.pop(-1) for i in range(len(co)-sentences[i].count('$'))]
-            if (len(co) == 0):
-                state.pop(-1)
-            state.append('InsideTab')
-            co.append('While')
-            ooo[0] = 0
-            a += 1
-            break
-        elif (len(co) >= sentences[i].count('$') and 'HeadFungsi' in j):
-            [co.pop(-1) for i in range(len(co)-sentences[i].count('$'))]
-            if (len(co) == 0):
-                state.pop(-1)
-            state.append('InsideTab')
-            co.append('Fungsi')
-            ooo[0] = 0
-            a += 1
-            break
-        elif (len(co) >= sentences[i].count('$') and 'HeadClass' in j):
-            [co.pop(-1) for i in range(len(co)-sentences[i].count('$'))]
-            if (len(co) == 0):
-                state.pop(-1)
-            state.append('InsideClass')
-            co.append('Class')
-            ooo[0] = 0
-            a += 1
-            break
-        elif (len(co) >= sentences[i].count('$') and 'HeadWith' in j):
-            [co.pop(-1) for i in range(len(co)-sentences[i].count('$'))]
-            if (len(co) == 0):
-                state.pop(-1)
-            state.append('InsideTab')
-            co.append('With')
-            ooo[0] = 0
-            a += 1
-            break
-        elif (len(co) and 'Fungsi' in co and 'InsideReturn' in j):
-            #state.pop(-1)
-            #state.append('XXX')
-            #co.pop(-1)
-            ooo[0] += 1
-            a += 1
-        elif (len(co) and 'HeadElif' in j and 'IF' == co[-1] and sentences[i].count('$') == len(co)-1):
-            a += 1
-            break
-        elif (len(co) and 'HeadElif' in j and sentences[i].count('$') < len(co)-1 and 'IF' == co[sentences[i].count('$')]):
-            [state.pop(-1) for i in range(len(co)-sentences[i].count('$'))]
-            [co.pop(-1) for i in range(len(co)-sentences[i].count('$')-1)]
-            a += 1
-            break
-        elif (len(co) and 'HeadElse' in j and 'IF' == co[-1] and sentences[i].count('$') == len(co)-1):
-            co.pop(-1)
-            co.append('ELSE')
-            a += 1
-            break
-        elif (len(co) and 'HeadElse' in j and sentences[i].count('$') < len(co)-1 and 'IF' == co[sentences[i].count('$')]):
-            [state.pop(-1) for i in range(len(co)-sentences[i].count('$')-1)]
-            [co.pop(-1) for i in range(len(co)-sentences[i].count('$'))]
-            co.append('ELSE')
-            a += 1
-            break
-        elif (state[-1] == 'Accepted'):
-            [state.pop(-1) for i in range(len(co)-sentences[i].count('$'))]
-            if (len(state)):
-                state.pop(-1)
-            state.append('XXX')
-            if (co != []):
-                [co.pop(-1) for i in range(len(co)-sentences[i].count('$'))]
-            a += 1
-            break
-        elif (state[-1] == 'Accepted2' and sentences[i].count('$') <= len(co)):
+                if (co != []):
+                    [co.pop(-1) for i in range(len(co)-sentences[i].count('$'))]
+                a += 1
+                break
+        if (len(co) and sentences[i].count('$')):
             state.pop(-1)
             state.append('InsideTab')
-            if (co != []):
-                [co.pop(-1) for i in range(len(co)-sentences[i].count('$'))]
-            a += 1
-            break
-    if (len(co) and sentences[i].count('$')):
-        state.pop(-1)
-        state.append('InsideTab')
-    if (i == len(sentences)-1 and len(co) and ooo[0] == 0 and a != 0):
-        a = 0
-    if (a == 0):
-        errorLines.append(i)
-        print('Syntax Error')
+        if (i == len(sentences)-1 and len(co) and ooo[0] == 0 and a != 0):
+            a = 0
+        if (a == 0):
+            errorLines.append(i)
+    print()
+    if (len(errorLines) == 0):
+        print('Compile success!')
     else:
-        print()
-
-if (len(errorLines) == 0):
-    print('Compile success!')
-else:
-    '''
-    for i in range(len(realtext)):
-        print(realtext[i], end='    ')
-        if (i in errorLines):
-            print("Syntax Error")
-        else:
-            print()
-    '''
-    #for i in errorLines:
-    #    print(realtext[i] + '  ' + 'Syntax Error in Line ' + str(i))
-print(time.time()-x)
+        '''
+        for i in range(len(realtext)):
+            print(realtext[i], end='    ')
+            if (i in errorLines):
+                print("Syntax Error")
+            else:
+                print()
+        '''
+        for i in errorLines:
+            print(realtext[i] + '  ' + 'Syntax Error in Line ' + str(i))
+    print()
+    print("Compiling time: {:5f} s".format(time.time()-starttime))
+except:
+    print("ERROR BACA FILE")
