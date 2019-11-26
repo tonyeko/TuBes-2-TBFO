@@ -44,7 +44,6 @@ def read_python_file(filename):
 def removecomment(sentence):
     temp = sentence.split("\n")
     idxpetik = []
-    print(sentence)
     for i in range(len(temp)):
         if "'''" in temp[i]:
             idxpetik.append(i)
@@ -110,10 +109,13 @@ def isAlphabetExist(array):                     # Untuk memastikan variabel atau
     return True
 
 def parse(sentence, grammar):
+    '''
     word = splitquote(sentence.rstrip(), "'")                    # rstrip untuk ngehilangin spasi di belakang, bisa untuk ' atau "
     whitespace = len(['' for i in word if i == ''])
+    print(word2)
     # INI UNTUK KASUS OPERATOR
-    word2 = re.split('[-|+|*|/]', ''.join(word))               # hilangin simbol operator
+    word2 = re.split('[-|+|*|/]', ' '.join(word))               # hilangin simbol operator
+    #print(word2)
     if (isAlphabetExist(word2)):
         if (len(word) != len(word2)):
             for i in range(len(word)):
@@ -125,15 +127,31 @@ def parse(sentence, grammar):
     
     words = ''.join(word)
     if whitespace > 0: words = ' ' + words
-    
-    # table = [ [ [] for i in range(len(sentence)) ] for j in range(len(sentence)) ] 
-    table = [ [ [] for i in range(len(words)) ] for j in range(len(words)) ] 
-    words = list(words)
-    print(words)
+    '''
+
+    words = list(sentence.rstrip())
+
+    for i in range(len(words)):
+        #print(words[i], end=" ")
+        if words[i] == ' ':
+            words[i] = '~'          # Kalau dimasukkin ke line.replace ngeprintnya jadi jelek
+
     # Algoritma 1
+    if (len(words) >= 2 and words[0] == ' '):
+        while (words[1] == ' '):
+            words.pop(1)
+    if  ('#' in "".join(words)):
+        i = words.index('#')
+        while (i < len(words)):
+            words.pop(i)
+
+    # Algoritma 2
     if (len(words) > 0):
         column = 0
         while(column < len(words)):
+            if (words[column] == ' '):
+                while (column < len(words)-1 and words[column+1] == ' '):
+                    words.pop(column+1)
             temp = search_rules(grammar, [words[column]])
             if ('Var' in temp):
                 temp = search_rules(grammar, [words[column]])
@@ -171,7 +189,8 @@ def parse(sentence, grammar):
                     break
             if (x == 0):
                 words = temp.copy()
-    #print(words)
+
+    # Algoritma 3
     table = [ [ [] for i in range(len(words)) ] for j in range(len(words)) ] 
     for column in range(len(words)):
         table[column][column] = search_rules(grammar, [words[column]])
@@ -180,8 +199,7 @@ def parse(sentence, grammar):
                 for non_term in itertools.product(table[row][s - 1], table[s][column]):
                         table[row][column].extend(search_rules(grammar, non_term))
 
-    #print(table[0][len(table)-1])
-    #print(table[0][len(table)-1])
+    # Algoritma 4
     for i in table[0][-1]:
         if state[-1] == i:
             if (len(co) == sentence.count('$')):
@@ -206,7 +224,7 @@ state = ['XXX']
 co = []
 ooo = [-1]
 errorLines = []
-print(sentences)
+#print(sentences)
 for i in range(len(sentences)):
     parse_table = parse(sentences[i], grammar)
     a = 0
