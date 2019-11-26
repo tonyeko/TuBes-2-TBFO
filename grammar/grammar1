@@ -26,9 +26,6 @@ CharList0 -> Alphabets | '_'
 CharList1 -> Alphabets | Digits | Others | '''
 CharList2 -> Alphabets | Digits | Others | '"'
 CharList3 -> Alphabets | Digits | Others | ''' | '"'
-StrList1 -> StrList1 StrList1 | CharList1
-StrList2 -> StrList2 StrList2 | CharList2
-StrList3 -> StrList3 StrList3 | CharList3
 
 Var -> CharList0 Alphanum | CharList0 | VarKons BracketParams | VarKons '.' VarKons
 BracketParams -> '[' VarKons ']' BracketParams | '[' VarKons ']'
