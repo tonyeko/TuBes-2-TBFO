@@ -1,0 +1,15 @@
+for i in x:
+	if (x == 2):
+		x
+		if (x == 2):
+			x
+	else:
+		y
+		if (x==1):
+			wow
+	elif (x==1):
+		wow
+		else:
+			fu
+	x
+	y

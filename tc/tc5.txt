@@ -1,0 +1,22 @@
+if (x == 2):
+	x
+	if (x == 2):
+		x
+	else:
+		y
+		if (x==1):
+			wow
+	elif (x==1):
+		wow
+		else:
+			fu
+else:
+	y
+elif (x==1):
+	ning
+if (x == 2):
+	nong
+else:
+	if (x):
+		ning
+	nong

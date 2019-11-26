@@ -1,7 +1,7 @@
 S -> Inside S | InsideNoEOL | Inside
 
-Inside -> Assign | VarKons EOL | Boolean EOL | If EOL | Loop EOL | Import EOL | Fungsi EOL | Class EOL | EOL
-InsideNoEOL -> AssignNoEOL | VarKons | Boolean | If | Loop | Import | Fungsi | Class
+Inside -> Assign | VarKons EOL | Boolean EOL | If EOL | Loop EOL | Import EOL | Fungsi EOL | Class EOL | With EOL | Pass EOL | Raise EOL | EOL
+InsideNoEOL -> AssignNoEOL | VarKons | Boolean | If | Loop | Import | Fungsi | Class | With | Pass | Raise
 InsideTab -> TAB Inside InsideTab | InsideEndTab
 InsideEndTab -> TAB Inside | TABS EOL | TAB InsideNoEOL
 
@@ -11,34 +11,37 @@ Digits -> '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
 
 Others -> '!' | '#' | '$' | '%' | '&' | '(' | ')' | '*' | '+' | ',' | '-' | '.' | '/' | ':' | ';' | '<' | '=' | '>' | '?' | '@' | '[' | '\' | ']' | '^' | '_' | '`' | '{' | '|' | '}' | '~'
 
-Space -> '~' Space | '~'
+Space -> Space Space | '~'
 SpaceOrEmpty -> Space | EEE
 
-EOL -> ';'
+Pass -> 'p' 'a' 's' 's'
+Raise -> 'r' 'a' 'i' 's' 'e' Space Operasi
+
+EOL -> SpaceOrEmpty ';'
 TAB -> '$'
 TABS -> TAB TABS | EEE
-Angka -> Digits Angka | Digits
+Angka -> Angka Angka | Digits
 
 CharList0 -> Alphabets | '_'
 CharList1 -> Alphabets | Digits | Others | '''
 CharList2 -> Alphabets | Digits | Others | '"'
 CharList3 -> Alphabets | Digits | Others | ''' | '"'
-StrList1 -> CharList1 StrList1 | CharList1
-StrList2 -> CharList2 StrList2 | CharList2
-StrList3 -> CharList3 StrList3 | CharList3
+StrList1 -> StrList1 StrList1 | CharList1
+StrList2 -> StrList2 StrList2 | CharList2
+StrList3 -> StrList3 StrList3 | CharList3
 
-Var -> CharList0 Alphanum | CharList0 | VarKons '[' VarKons ']'
-Alphanum -> CharList0 Alphanum | Digits Alphanum | CharList0 | Digits
+Var -> CharList0 Alphanum | CharList0 | VarKons BracketParams | VarKons '.' VarKons
+BracketParams -> '[' VarKons ']' BracketParams | '[' VarKons ']'
+Alphanum -> Alphanum Alphanum | CharList0 | Digits
 
-Kons -> Angka | '"' CharList1 '"' | ''' CharList2 ''' | ''' ''' ''' CharList3 ''' ''' ''' | Array
+Kons -> Angka | '"' CharList1 '"' | ''' CharList2 ''' | ''' ''' ''' CharList3 ''' ''' ''' | Array | PanggilFungsi | 'F' 'a' 'l' 's' 'e' | 'T' 'r' 'u' 'e' | 'N' 'o' 'n' 'e'
 
-Array -> '[' SpaceOrEmpty VarKons SpaceOrEmpty LoopOrNot ']'
-LoopOrNot -> HeadFor2 VarKons SpaceOrEmpty | HeadFor2 'r' 'a' 'n' 'g' 'e' SpaceOrEmpty '(' SpaceOrEmpty VarKons SpaceOrEmpty ')' SpaceOrEmpty
+Array -> '[' SpaceOrEmpty VarKons SpaceOrEmpty LoopOrNot ']' | '[' SpaceOrEmpty ArgsCall SpaceOrEmpty ']'
+LoopOrNot -> HeadFor2 VarKons SpaceOrEmpty | HeadFor2 'r' 'a' 'n' 'g' 'e' SpaceOrEmpty '(' SpaceOrEmpty VarKons SpaceOrEmpty ')' SpaceOrEmpty | EEE
 
-Operasi -> Operasi2 SpaceOrEmpty Operator SpaceOrEmpty Operasi | Operasi2
-Operasi2 -> VarKons | PanggilFungsi | ArgsCall | SpaceOrEmpty '(' SpaceOrEmpty Operasi SpaceOrEmpty ')' SpaceOrEmpty
+Operasi -> Operasi SpaceOrEmpty Operator SpaceOrEmpty Operasi | Operasi SpaceOrEmpty OperasiBoolean SpaceOrEmpty Operasi | VarKons | PanggilFungsi | SpaceOrEmpty '(' SpaceOrEmpty Operasi SpaceOrEmpty ')' SpaceOrEmpty
 
-Operator -> '+' | '-' | '*' | '/' | '//' | '%'
+Operator -> '+' | '-' | '*' | '/' | '/' '/' | '%' | '*' '*'
 
 VarKons -> Var | Kons
 
@@ -53,42 +56,48 @@ AssignNoEOL -> ArgsAssign SpaceOrEmpty SamaDengan SpaceOrEmpty Operasi SpaceOrEm
 Fungsi -> HeadFungsi InsideFungsi
 
 InsideFungsi -> InsideTab InsideReturn | InsideReturn | InsideTab
-InsideReturn -> 'r' 'e' 't' 'u' 'r' 'n' Space Operasi SpaceOrEmpty EOL
+InsideReturn -> TAB 'r' 'e' 't' 'u' 'r' 'n' Space Operasi SpaceOrEmpty EOL | TAB 'r' 'e' 't' 'u' 'r' 'n' Space Operasi SpaceOrEmpty
 
 PanggilFungsi -> Var ParamsCall
 
-ArgsCall -> VarKons SpaceOrEmpty ',' SpaceOrEmpty ArgsCall | VarKons
+ArgsCall -> Operasi SpaceOrEmpty ',' SpaceOrEmpty ArgsCall | Operasi
 ArgsAssign -> Var SpaceOrEmpty ',' SpaceOrEmpty ArgsAssign | Var
 ArgsFungsi -> Var SpaceOrEmpty HintOrEmpty ',' SpaceOrEmpty ArgsFungsi | Var HintOrEmpty
 
 HintOrEmpty -> SpaceOrEmpty ':' SpaceOrEmpty Var | EEE
-Hint2OrEmpty -> '-' '>' SpaceOrEmpty Var SpaceOrEmpty
+Hint2OrEmpty -> '-' '>' SpaceOrEmpty Var SpaceOrEmpty | EEE
 
-Params -> SpaceOrEmpty '(' SpaceOrEmpty ArgsFungsi SpaceOrEmpty ')' SpaceOrEmpty Hint2OrEmpty
-ParamsCall -> SpaceOrEmpty '(' SpaceOrEmpty ArgsCall SpaceOrEmpty ')' SpaceOrEmpty
+Params -> SpaceOrEmpty '(' SpaceOrEmpty ArgsFungsi SpaceOrEmpty ')' SpaceOrEmpty Hint2OrEmpty | SpaceOrEmpty '(' SpaceOrEmpty ')' SpaceOrEmpty Hint2OrEmpty
+ParamsCall -> SpaceOrEmpty '(' SpaceOrEmpty ArgsCall SpaceOrEmpty ')' SpaceOrEmpty | SpaceOrEmpty '(' SpaceOrEmpty ')' SpaceOrEmpty
 
-HeadFungsi -> 'd' 'e' 'f' Space Var Params ':' SpaceOrEmpty EOL
+HeadFungsi -> 'd' 'e' 'f' Space Var Params ':' SpaceOrEmpty EOL |  'd' 'e' 'f' Space Var SpaceOrEmpty ':' SpaceOrEmpty EOL
 
 Kondisi -> SpaceOrEmpty '(' SpaceOrEmpty Boolean SpaceOrEmpty ')' SpaceOrEmpty | SpaceOrEmpty Boolean SpaceOrEmpty
 
-Boolean -> Boolean2 SpaceOrEmpty OperasiBoolean SpaceOrEmpty Boolean | Boolean2 SpaceOrEmpty Operator SpaceOrEmpty Boolean | Boolean2
-Boolean2 -> Operasi | SpaceOrEmpty '(' SpaceOrEmpty Boolean SpaceOrEmpty ')' SpaceOrEmpty
+Boolean -> Boolean SpaceOrEmpty OperasiBoolean SpaceOrEmpty Boolean | Operasi | SpaceOrEmpty '(' SpaceOrEmpty Boolean SpaceOrEmpty ')' SpaceOrEmpty | Boolean SpaceOrEmpty Operator SpaceOrEmpty Boolean
 
-OperasiBoolean -> 'a' 'n' 'd' | 'o' 'r' | '=' '=' | '!' '='
+OperasiBoolean -> 'a' 'n' 'd' | 'o' 'r' | '=' '=' | '<' '=' | '>' '=' | '!' '=' | 'i' 'n' | 'i' 's'
 
 If -> HeadIf InsideTab Elif | HeadIf InsideTab Else | HeadIf InsideTab
-Elif -> 'e' 'l' HeadIf InsideTab Elif | 'e' 'l' HeadIf InsideTab Else | 'e' 'l' HeadIf InsideTab
+Elif -> HeadElif InsideTab Elif | HeadElif InsideTab Else | HeadElif InsideTab
 Else -> HeadElse InsideTab
 
 HeadIf -> 'i' 'f' Kondisi ':' SpaceOrEmpty EOL
+HeadElif -> 'e' 'l' HeadIf
 HeadElse -> 'e' 'l' 's' 'e' SpaceOrEmpty ':' SpaceOrEmpty EOL
+
+With -> HeadWith InsideTab
+HeadWith -> 'w' 'i' 't' 'h' Space VarKons Space 'a' 's' Space Var SpaceOrEmpty ':' SpaceOrEmpty EOL
 
 Loop -> HeadFor InsideTab | HeadWhile InsideTab
 
 HeadWhile -> 'w' 'h' 'i' 'l' 'e' Kondisi ':' SpaceOrEmpty EOL
-HeadFor -> HeadFor2 VarKons SpaceOrEmpty ':' SpaceOrEmpty EOL | HeadFor2 'r' 'a' 'n' 'g' 'e' SpaceOrEmpty '(' SpaceOrEmpty VarKons SpaceOrEmpty ')' SpaceOrEmpty ':' SpaceOrEmpty EOL
+HeadFor -> HeadFor2 VarKons SpaceOrEmpty ':' SpaceOrEmpty EOL | HeadFor2 Var SpaceOrEmpty '(' SpaceOrEmpty VarKons SpaceOrEmpty ')' SpaceOrEmpty ':' SpaceOrEmpty EOL
 HeadFor2 -> 'f' 'o' 'r' Space Var Space 'i' 'n' Space
+InsideLoop -> InsideLoop InsideLoop | InsideTab | InsideBreak | InsideContinue
+InsideBreak -> TAB 'b' 'r' 'e' 'a' 'k' EOL | TAB 'b' 'r' 'e' 'a' 'k' SpaceOrEmpty
+InsideContinue -> TAB 'c' 'o' 'n' 't' 'i' 'n' 'u' 'e' EOL | TAB 'c' 'o' 'n' 't' 'i' 'n' 'u' 'e' SpaceOrEmpty
 
-Class -> HeadClass InsideClass
-InsideClass -> TAB Fungsi
+Class -> HeadClass InsideClass	
+InsideClass -> InsideClass InsideClass | TAB Fungsi
 HeadClass -> 'c' 'l' 'a' 's' 's' Space Var SpaceOrEmpty '(' SpaceOrEmpty ')' SpaceOrEmpty ':' SpaceOrEmpty EOL | 'c' 'l' 'a' 's' 's' Space Var SpaceOrEmpty ':' SpaceOrEmpty EOL

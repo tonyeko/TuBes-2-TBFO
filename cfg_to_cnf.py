@@ -188,7 +188,7 @@ if (len(sys.argv) > 1):
                 for cfg in cfgs:
                     if ('EEE' in cfg):
                         remove_epsilon_prod(cfg)
-                print('\n'.join(cfgs))
+                #print('\n'.join(cfgs))
         else:
             help()
             exit()
@@ -201,7 +201,7 @@ if (len(sys.argv) > 1):
             if (sys.argv[a+1] != 'off'):
                 for cfg in cfgs[1:]:
                     remove_useless_prod(cfg)
-                print('\n'.join(cfgs))
+                #print('\n'.join(cfgs))
         else:
             help()
             exit()
