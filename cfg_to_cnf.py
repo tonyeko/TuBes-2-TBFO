@@ -1,6 +1,6 @@
 '''
 CFG to CNF Algorithm v.1
-Created by Yonatan Viody.
+Created by Okinawa Fresh Milk Brown Sugar.
 '''
 import sys
 import itertools

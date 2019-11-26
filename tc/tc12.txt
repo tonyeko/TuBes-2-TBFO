@@ -5,7 +5,7 @@ class Player:
 		self.fun = 0
 
 	def valueOut(self):
-		print('''x'''.format(self.hygiene, self.energy, self.fun))
+		print(x.format(self.hygiene, self.energy, self.fun))
 
 	def IsFinal(self):
 		return (self.hygiene != 15)
