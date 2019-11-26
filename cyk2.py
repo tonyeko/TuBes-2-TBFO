@@ -14,10 +14,31 @@ def read_grammar(filename):
 
 def read_python_file(filename):
     all_lines = list()
-    with open(filename, "r") as file:
+    file = ''.join(removecomment(open(filename, "r").read()))
+    file1 = open("temp","w"); file1.write(file); file1.close()
+    with open('temp', "r") as file:
         for line in file.readlines():
             all_lines.append(line.replace("\n", ";").replace("\t", "$"))
     return all_lines
+
+def removecomment(sentence):
+    temp = sentence.split("\n")
+    idxpetik = []
+    for i in range(len(temp)):
+        if temp[i] == "'''":
+            idxpetik.append(i)
+    if (len(idxpetik)%2 == 1):
+        idx = (idxpetik[len(idxpetik)-1])
+        temp[idx] = '^%'; idx+=1
+        return ''.join(temp[:idx])
+    else:
+        if (len(idxpetik)>1):
+            idx = idxpetik[0]
+            while idx <= idxpetik[1]:
+                temp[idx] = "\n"
+                idx+=1 
+        print(''.join(temp))
+        return ''.join(temp)
 
 class Rule:
     def __init__(self, line):
@@ -68,44 +89,44 @@ def recur_search(prods, grammar):
             a.append(search_rules(grammar, "".join(i)))
         return list(filter(None,a))[0]
         
-
-def parse(sentence, grammar):
-    # print("=========================")
-    print(sentence)
-    # print("=========================")
-    # words = [i for i in sentence]
-    # word = sentence.split()                                 # Hilangin spasi
-
-    word = sentence.split("'")
+def splitquote(sentence, quote):
+    word = sentence.split(quote)
     if (len(word)%2 == 0):
-        word = ['^','%']
+        word = ['^', '%']
     else:
         word = list(map(lambda x: 'a' if (word.index(x)%2) else x, word))
-        word = "'".join(word).split()
+        word = '"'.join(word).split(' ')
+    return word
 
+def isAlphabetExist(array):                     # Untuk memastikan variabel atau angka
+    for word in array:
+        if bool(re.match('^[0-9]+$', word[0])): # Berarti char setelah huruf ke-0 harus angka semua
+            for i in range(len(word)):
+                if bool(re.match('^[a-zA-Z]+$', word[i])):
+                    return False
+        else:
+            return True
+    return True
+
+def parse(sentence, grammar):
+    word = splitquote(sentence.rstrip(), "'")                    # rstrip untuk ngehilangin spasi di belakang, bisa untuk ' atau "
+    whitespace = len(['' for i in word if i == ''])
     # INI UNTUK KASUS OPERATOR
-    word2 = re.split('[-+*/]', ''.join(word))               # hilangin simbol operator
-    for i in range(len(word)):
-        for j in range(len(word2)):
-            if word[i] == word2[j]:
-                word[i] = 'x'
-    # print(words)
+    word2 = re.split('[-|+|*|/]', ''.join(word))               # hilangin simbol operator
+    # print('SADASDADASDAD: ', end=" ============= "); print(word2)
+    if (isAlphabetExist(word2)):
+        if (len(word) != len(word2)):
+            for i in range(len(word)):
+                for j in range(len(word2)):
+                    if word[i] == word2[j]:
+                        word[i] = 'x'
+    else:
+        word = ['^', '%']
+    
     words = ''.join(word)
+    if whitespace > 0: words = ' ' + words
+    
     print(words)
-
-    for i in range(len(words)):
-        #print(words[i], end=" ")
-        if words[i] == ' ':
-            words[i] = '~'          # Kalau dimasukkin ke line.replace ngeprintnya jadi jelek
-        #print(words[i])
-        # if i < len(words)-1:
-        #     if words[i]+words[i+1] == '\t':
-        #         words[i:i+2] = '$'
-        #     elif words[i]+words[i+1] == '\r':
-        #         words[i:i+2] = ';'
-        #     elif words[i]+words[i+1] == '\n':
-        #         words[i:i+2] = ';'
-
     # table = [ [ [] for i in range(len(sentence)) ] for j in range(len(sentence)) ] 
     table = [ [ [] for i in range(len(words)) ] for j in range(len(words)) ] 
     
@@ -159,19 +180,10 @@ grammar = read_grammar(GRAMMAR_RULES)
 sentences = read_python_file(SENTENCES)
 realtext = list(map(lambda x: x.replace('\n',''), open(SENTENCES, "r").readlines()))
 grammar = Grammar(grammar)
-# print(grammar)
-print(sentences)
 state = ['XXX']
 error = 0
 for i in range(len(sentences)):
     parse_table = parse(sentences[i], grammar)
-    # Print Tabel
-    '''
-    for row in range(len(parse_table)):
-        for col in range(len(parse_table)):
-            print(parse_table[row][col], end="")
-        print()
-    '''
     print(realtext[i],end="    ")
     if not([] == list(filter(None,map(lambda x: x if ('Head' in x) else None, parse_table[0][-1])))):
         state.pop(0)
