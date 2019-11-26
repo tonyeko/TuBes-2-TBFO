@@ -188,6 +188,7 @@ if (len(sys.argv) > 1):
                 for cfg in cfgs:
                     if ('EEE' in cfg):
                         remove_epsilon_prod(cfg)
+                print('\n'.join(cfgs))
         else:
             help()
             exit()
@@ -200,11 +201,22 @@ if (len(sys.argv) > 1):
             if (sys.argv[a+1] != 'off'):
                 for cfg in cfgs[1:]:
                     remove_useless_prod(cfg)
+                print('\n'.join(cfgs))
         else:
             help()
             exit()
     cnfs = [parsing_cfg(cfgs[0])] + cnfs
     for cfg in cfgs[1:]:
+        #print(cfg)
+        #print(cnfs)
         cnfs.append(parsing_cfg(cfg))
     cnfs = list(map(lambda x: x+ '\n', cnfs))
+    '''
+    for i in range(len(cnfs)):
+        if ('S ' == cnfs[i][:2]):
+            break
+    start = [cnfs[i]]
+    cnfs.pop(i)
+    cnfs = start + cnfs
+    '''
     open('grammar/chowsky','w').writelines(cnfs)
