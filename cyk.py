@@ -99,16 +99,6 @@ def splitquote(sentence, quote):
         word = '"'.join(word).split(' ')
     return word
 
-def isAlphabetExist(array):
-    for word in array:
-        if bool(re.match('^[0-9]+$', word[0])): 
-            for i in range(len(word)):
-                if bool(re.match('^[a-zA-Z]+$', word[i])):
-                    return False
-        else:
-            return True
-    return True
-
 def parse(sentence, grammar):
     word = " ".join(splitquote(sentence.rstrip(), "'"))
     word = " ".join(splitquote(word, '"'))
