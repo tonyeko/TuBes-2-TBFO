@@ -1,0 +1,27 @@
+class Player:
+	def __init__(self):
+		self.hygiene = 0
+		self.energy = 10
+		self.fun = 0
+
+	def valueOut(self):
+		print(x.format(self.hygiene, self.energy, self.fun))
+
+	def IsFinal(self):
+		return (self.hygiene != 15)
+
+	def check(self, a, b, c):
+		a += self.hygiene
+		b += self.energy
+		c += self.fun
+		return (a <= 15) and (c >= 0)
+	
+	def sign(self, a, b, c):
+		if (self.check(a,b,c)):
+			self.hygiene += a
+			self.energy += b
+			self.fun += c
+			self.valueOut()
+		else:
+			print("x")
+		return self

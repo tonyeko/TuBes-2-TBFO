@@ -99,9 +99,9 @@ def splitquote(sentence, quote):
         word = '"'.join(word).split(' ')
     return word
 
-def isAlphabetExist(array):                     # Untuk memastikan variabel atau angka
+def isAlphabetExist(array):
     for word in array:
-        if bool(re.match('^[0-9]+$', word[0])): # Berarti char setelah huruf ke-0 harus angka semua
+        if bool(re.match('^[0-9]+$', word[0])): 
             for i in range(len(word)):
                 if bool(re.match('^[a-zA-Z]+$', word[i])):
                     return False
@@ -110,32 +110,13 @@ def isAlphabetExist(array):                     # Untuk memastikan variabel atau
     return True
 
 def parse(sentence, grammar):
-    '''
-    word = splitquote(sentence.rstrip(), "'")                    # rstrip untuk ngehilangin spasi di belakang, bisa untuk ' atau "
-    whitespace = len(['' for i in word if i == ''])
-    print(word2)
-    # INI UNTUK KASUS OPERATOR
-    word2 = re.split('[-|+|*|/]', ' '.join(word))               # hilangin simbol operator
-    #print(word2)
-    if (isAlphabetExist(word2)):
-        if (len(word) != len(word2)):
-            for i in range(len(word)):
-                for j in range(len(word2)):
-                    if word[i] == word2[j]:
-                        word[i] = 'x'
-    else:
-        word = ['^', '%']
-    
-    words = ''.join(word)
-    if whitespace > 0: words = ' ' + words
-    '''
     word = " ".join(splitquote(sentence.rstrip(), "'"))
     word = " ".join(splitquote(word, '"'))
     words = list(word)
 
     for i in range(len(words)):
         if words[i] == ' ':
-            words[i] = '~'          # Kalau dimasukkin ke line.replace ngeprintnya jadi jelek
+            words[i] = '~'
     
     # Algoritma 1
     if (len(words) >= 2 and words[0] == '~'):
@@ -226,13 +207,9 @@ try:
     co = []
     ooo = [-1]
     errorLines = []
-    #print(sentences)
     for i in range(len(sentences)):
         parse_table = parse(sentences[i], grammar)
         a = 0
-        #print(realtext[i], end="    ")
-        #print(state,co)
-        #print(ooo[0], parse_table[0][-1])
         for j in parse_table[0][-1]:
             if (sentences[i].replace('$','').replace(';','').replace(' ','') != "" and not('HeadIf' in j or 'HeadElif' in j or 'HeadFor' in j or 'HeadWhile' in j or 'HeadFungsi' in j or 'HeadClass' in j or 'HeadWith' in j or 'HeadElse' in j) and len(co) > sentences[i].count('$') and not(ooo[0])):
                 if (state[-1] == 'Accepted'):
@@ -297,9 +274,6 @@ try:
                 a += 1
                 break
             elif (len(co) and 'Fungsi' in co and 'InsideReturn' in j):
-                #state.pop(-1)
-                #state.append('XXX')
-                #co.pop(-1)
                 ooo[0] += 1
                 a += 1
             elif (len(co) and 'HeadElif' in j and 'IF' == co[-1] and sentences[i].count('$') == len(co)-1):
@@ -348,14 +322,6 @@ try:
     if (len(errorLines) == 0):
         print('Compile success!')
     else:
-        '''
-        for i in range(len(realtext)):
-            print(realtext[i], end='    ')
-            if (i in errorLines):
-                print("Syntax Error")
-            else:
-                print()
-        '''
         for i in errorLines:
             print(realtext[i] + '  ' + 'Syntax Error in Line ' + str(i))
     print()
